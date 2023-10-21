@@ -2,6 +2,7 @@ import 'package:craftman/config/page%20route/detail/route_name.dart';
 import 'package:craftman/features/authentication/presentation/pages/login_page.dart';
 import 'package:craftman/features/authentication/presentation/pages/mobile_0tp.dart';
 import 'package:craftman/features/authentication/presentation/pages/signup_page.dart';
+import 'package:craftman/features/home/presentation/pages/skills_detail_page.dart';
 import 'package:craftman/features/splash_onboarding/presentation/pages/onboard4.dart';
 import 'package:craftman/features/splash_onboarding/presentation/pages/bottomnav.dart';
 import 'package:craftman/features/splash_onboarding/presentation/pages/onboarding1.dart';
@@ -33,6 +34,8 @@ class AppRoute {
         return CustomPageRoute(child: const LoginPage());
       case RouteName.mobileOtp:
         return CustomPageRoute(child: const MobileOtp());
+      case RouteName.skilldetail:
+        return CustomPageRoute(child: const SkillsDetail());
 
       default:
         return CustomPageRoute(child: const LoginPage());

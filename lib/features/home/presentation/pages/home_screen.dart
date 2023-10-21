@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:craftman/config/page%20route/page_route.dart';
 import 'package:craftman/constants/appcolors.dart';
 import 'package:craftman/constants/appscaffold.dart';
 import 'package:craftman/constants/apptext.dart';
@@ -40,30 +43,36 @@ class HomePage extends StatelessWidget {
                   children: List.generate(
                     15,
                     (index) {
-                      return Column(
-                        // mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: size.width * 0.4,
-                            height: size.width * 0.25,
-                            decoration: BoxDecoration(
-                                color: Appcolors.white,
-                                borderRadius:
-                                    BorderRadius.circular(size.width * 0.07)),
-                            child: Icon(
-                              Icons.handyman_rounded,
-                              size: 35.sp,
-                              color: Appcolors.blue,
+                      return GestureDetector(
+                        onTap: () =>
+                            // log('message'),
+
+                            Navigator.pushNamed(context, RouteName.skilldetail),
+                        child: Column(
+                          // mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: size.width * 0.4,
+                              height: size.width * 0.25,
+                              decoration: BoxDecoration(
+                                  color: Appcolors.white,
+                                  borderRadius:
+                                      BorderRadius.circular(size.width * 0.07)),
+                              child: Icon(
+                                Icons.handyman_rounded,
+                                size: 35.sp,
+                                color: Appcolors.blue,
+                              ),
                             ),
-                          ),
-                          Center(
-                            child: AppText(
-                              text: 'TiTle',
-                              fontweight: FontWeight.w600,
-                            ),
-                          )
-                        ],
+                            Center(
+                              child: AppText(
+                                text: 'TiTle',
+                                fontweight: FontWeight.w600,
+                              ),
+                            )
+                          ],
+                        ),
                       );
                     },
                   )),
