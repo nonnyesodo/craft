@@ -9,4 +9,9 @@ class RouteName {
   static const mobileOtp = '/mobileotp';
   static const login = '/login';
   static const skilldetail = '/skillsdetail';
+  static const serviceproviderdetail = '/serviceproviderdetail';
+  static const chat = '/chats';
+  static const changepassword = '/changepassword';
+
+  static const categories = '/categories';
 }

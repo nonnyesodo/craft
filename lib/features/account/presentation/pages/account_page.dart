@@ -1,3 +1,4 @@
+import 'package:craftman/config/page%20route/detail/route_name.dart';
 import 'package:craftman/constants/appcolors.dart';
 import 'package:craftman/constants/appscaffold.dart';
 import 'package:craftman/constants/apptext.dart';
@@ -36,7 +37,7 @@ class AccountPage extends StatelessWidget {
                     height: size.width * 0.25,
                     decoration: BoxDecoration(
                         color: Appcolors.orange,
-                        image: DecorationImage(
+                        image: const DecorationImage(
                             image: AssetImage(OnboardingImages.splash)),
                         borderRadius: BorderRadius.circular(size.width * 0.15)),
                   ),
@@ -108,9 +109,14 @@ class AccountPage extends StatelessWidget {
                             prefixIcon: Icons.account_circle,
                           ),
                           AccountSelection(
-                              size: size,
-                              prefixIcon: Icons.key,
-                              title: 'Change Password'),
+                            size: size,
+                            prefixIcon: Icons.key,
+                            title: 'Change Password',
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, RouteName.changepassword);
+                            },
+                          ),
                           AccountSelection(
                               size: size,
                               prefixIcon: Icons.contact_support,
@@ -162,12 +168,14 @@ class AccountSelection extends StatelessWidget {
       required this.size,
       required this.prefixIcon,
       required this.title,
-      this.hidedivider = false});
+      this.hidedivider = false,
+      this.onTap});
 
   final Size size;
   final IconData prefixIcon;
   final String title;
   final bool hidedivider;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -176,31 +184,21 @@ class AccountSelection extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(
               horizontal: size.width * 0.03, vertical: size.width * 0.03),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Icon(
-                prefixIcon,
-                size: 28.sp,
-              ),
-              AppText(
-                text: title,
-                fontweight: FontWeight.w500,
-                size: 16,
-              ),
-              Icon(
-                Icons.arrow_forward_ios,
-                size: 28.sp,
-              ),
-            ],
+          child: GestureDetector(
+            onTap: onTap,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Icon(prefixIcon, size: 28.sp),
+                AppText(text: title, fontweight: FontWeight.w500, size: 16),
+                Icon(Icons.arrow_forward_ios, size: 28.sp)
+              ],
+            ),
           ),
         ),
         Visibility(
-          visible: !hidedivider,
-          child: Divider(
-            color: Appcolors.blackColor.withOpacity(0.5),
-          ),
-        )
+            visible: !hidedivider,
+            child: Divider(color: Appcolors.blackColor.withOpacity(0.5)))
       ],
     );
   }

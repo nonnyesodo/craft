@@ -1,7 +1,10 @@
 import 'package:craftman/config/page%20route/detail/route_name.dart';
+import 'package:craftman/features/account/presentation/pages/change_password.dart';
 import 'package:craftman/features/authentication/presentation/pages/login_page.dart';
 import 'package:craftman/features/authentication/presentation/pages/mobile_0tp.dart';
 import 'package:craftman/features/authentication/presentation/pages/signup_page.dart';
+import 'package:craftman/features/home/presentation/pages/chat.dart';
+import 'package:craftman/features/home/presentation/pages/service_provider.dart';
 import 'package:craftman/features/home/presentation/pages/skills_detail_page.dart';
 import 'package:craftman/features/splash_onboarding/presentation/pages/onboard4.dart';
 import 'package:craftman/features/splash_onboarding/presentation/pages/bottomnav.dart';
@@ -10,6 +13,7 @@ import 'package:craftman/features/splash_onboarding/presentation/pages/onboardin
 import 'package:craftman/features/splash_onboarding/presentation/pages/onboarding3.dart';
 import 'package:craftman/features/splash_onboarding/presentation/pages/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 
 import 'custom_page_route.dart';
 
@@ -36,7 +40,12 @@ class AppRoute {
         return CustomPageRoute(child: const MobileOtp());
       case RouteName.skilldetail:
         return CustomPageRoute(child: const SkillsDetail());
-
+      case RouteName.serviceproviderdetail:
+        return CustomPageRoute(child: const ServiceProviderDetail());
+      case RouteName.chat:
+        return CustomPageRoute(child: const Chats());
+      case RouteName.changepassword:
+        return CustomPageRoute(child: const ChangePassword());
       default:
         return CustomPageRoute(child: const LoginPage());
     }

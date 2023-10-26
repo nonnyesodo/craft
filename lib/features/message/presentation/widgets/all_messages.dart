@@ -38,7 +38,7 @@ class AllMessages extends StatelessWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CircleAvatar(
+                        const CircleAvatar(
                           radius: 50,
                           backgroundImage: AssetImage(
                             OnboardingImages.splash,
@@ -55,7 +55,7 @@ class AllMessages extends StatelessWidget {
                               fontweight: FontWeight.w700,
                               color: Appcolors.blue,
                             ),
-                            AppText(
+                            const AppText(
                               text: 'Sender last message ',
                               size: 16,
                             ),
