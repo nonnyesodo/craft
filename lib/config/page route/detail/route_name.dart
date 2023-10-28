@@ -12,6 +12,6 @@ class RouteName {
   static const serviceproviderdetail = '/serviceproviderdetail';
   static const chat = '/chats';
   static const changepassword = '/changepassword';
-
+  static const reviews = '/reviews';
   static const categories = '/categories';
 }

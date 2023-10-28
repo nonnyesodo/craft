@@ -17,10 +17,9 @@ class Messages extends StatelessWidget {
           children: [
             Center(
               child: AppText(
-                text: 'Messages',
-                color: Appcolors.white,
-                fontweight: FontWeight.w700,
-              ),
+                  text: 'Messages',
+                  color: Appcolors.white,
+                  fontweight: FontWeight.w700),
             ),
             SizedBox(height: size.height * 0.01),
             AllMessages(size: size)

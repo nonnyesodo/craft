@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:craftman/config/page%20route/detail/route_name.dart';
 import 'package:craftman/constants/appcolors.dart';
 import 'package:craftman/constants/appscaffold.dart';
 import 'package:craftman/constants/appshadowcontainer.dart';
@@ -59,31 +60,7 @@ class HomePage extends StatelessWidget {
                     child: ListView(
                   children: [
                     SizedBox(height: size.height * 0.01),
-                    CarouselSlider(
-                      options: CarouselOptions(
-                          autoPlayInterval: const Duration(seconds: 6),
-                          height: size.height * 0.25,
-                          autoPlay: true),
-                      items: [1, 2, 3, 4, 5].map((i) {
-                        return Builder(
-                          builder: (BuildContext context) {
-                            return Container(
-                              width: size.width,
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: size.width * 0.02),
-                              decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.circular(size.width * 0.03),
-                                  color: Appcolors.lightgrey,
-                                  image: const DecorationImage(
-                                      fit: BoxFit.contain,
-                                      image:
-                                          AssetImage(OnboardingImages.splash))),
-                            );
-                          },
-                        );
-                      }).toList(),
-                    ),
+                    HomeCarousel(size: size),
                     SizedBox(height: size.height * 0.01),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -92,10 +69,14 @@ class HomePage extends StatelessWidget {
                             text: 'Categories',
                             fontweight: FontWeight.w800,
                             color: Appcolors.blue),
-                        AppText(
-                            text: 'View All',
-                            size: 16,
-                            color: Appcolors.orange),
+                        GestureDetector(
+                          onTap: () => Navigator.pushNamed(
+                              context, RouteName.categories),
+                          child: AppText(
+                              text: 'View All',
+                              size: 16,
+                              color: Appcolors.orange),
+                        ),
                       ],
                     ),
 
@@ -105,29 +86,7 @@ class HomePage extends StatelessWidget {
                       child: ListView(
                         scrollDirection: Axis.horizontal,
                         children: List.generate(
-                            6,
-                            (index) => AppshadowContainer(
-                                  shadowcolour:
-                                      Appcolors.lightgrey.withOpacity(0.3),
-                                  margin: EdgeInsets.only(
-                                      right: size.width * 0.035,
-                                      bottom: size.width * 0.03,
-                                      top: size.width * 0.03),
-                                  width: size.width * 0.3,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(Icons.format_paint,
-                                          color: Appcolors.orange, size: 50.sp),
-                                      AppText(
-                                        text: 'Painting',
-                                        color: Appcolors.blue,
-                                        size: 16,
-                                        fontweight: FontWeight.w500,
-                                      )
-                                    ],
-                                  ),
-                                )),
+                            6, (index) => CategorieContainer(size: size)),
                       ),
                     ),
                     SizedBox(height: size.height * 0.025),
@@ -201,6 +160,77 @@ class HomePage extends StatelessWidget {
           ))
         ],
       ),
+    );
+  }
+}
+
+class CategorieContainer extends StatelessWidget {
+  const CategorieContainer({
+    super.key,
+    required this.size,
+  });
+
+  final Size size;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => Navigator.pushNamed(context, RouteName.skilldetail),
+      child: AppshadowContainer(
+        shadowcolour: Appcolors.lightgrey.withOpacity(0.3),
+        margin: EdgeInsets.only(
+            right: size.width * 0.035,
+            bottom: size.width * 0.03,
+            top: size.width * 0.03),
+        width: size.width * 0.3,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.format_paint, color: Appcolors.orange, size: 50.sp),
+            AppText(
+              text: 'Painting',
+              color: Appcolors.blue,
+              size: 16,
+              fontweight: FontWeight.w500,
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class HomeCarousel extends StatelessWidget {
+  const HomeCarousel({
+    super.key,
+    required this.size,
+  });
+
+  final Size size;
+
+  @override
+  Widget build(BuildContext context) {
+    return CarouselSlider(
+      options: CarouselOptions(
+          autoPlayInterval: const Duration(seconds: 6),
+          height: size.height * 0.25,
+          autoPlay: true),
+      items: [1, 2, 3, 4, 5].map((i) {
+        return Builder(
+          builder: (BuildContext context) {
+            return Container(
+              width: size.width,
+              margin: EdgeInsets.symmetric(horizontal: size.width * 0.02),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(size.width * 0.03),
+                  color: Appcolors.lightgrey,
+                  image: const DecorationImage(
+                      fit: BoxFit.contain,
+                      image: AssetImage(OnboardingImages.splash))),
+            );
+          },
+        );
+      }).toList(),
     );
   }
 }
