@@ -1,12 +1,9 @@
 import 'package:craftman/constants/appshadowcontainer.dart';
-import 'package:craftman/features/home/presentation/widgets/export.dart';
-import 'package:craftman/features/home/presentation/widgets/profile_pic.dart';
+import 'package:craftman/features/home/presentation/widget/export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../constants/appcolors.dart';
 import '../../../../constants/apptext.dart';
-import '../../../splash_onboarding/data/local/onboarding_Images.dart';
 
 class AllMessages extends StatelessWidget {
   const AllMessages({

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:craftman/config/page%20route/detail/route_name.dart';
 import 'package:craftman/constants/appcolors.dart';
 import 'package:craftman/constants/appscaffold.dart';
@@ -104,23 +106,29 @@ class AccountPage extends StatelessWidget {
                       child: Column(
                         children: [
                           AccountSelection(
-                            size: size,
-                            title: 'Account Details',
-                            prefixIcon: Icons.account_circle,
-                          ),
-                          AccountSelection(
-                            size: size,
-                            prefixIcon: Icons.key,
-                            title: 'Change Password',
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context, RouteName.changepassword);
-                            },
-                          ),
+                              size: size,
+                              prefixIcon: Icons.key,
+                              title: 'Change Password',
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, RouteName.changepassword);
+                              }),
                           AccountSelection(
                               size: size,
-                              prefixIcon: Icons.contact_support,
-                              title: 'Contact Us'),
+                              title: 'Account Details',
+                              prefixIcon: Icons.account_circle,
+                              onTap: () {
+                                print("object");
+                                Navigator.pushNamed(
+                                    context, RouteName.accountdetail);
+                              }),
+                          AccountSelection(
+                            size: size,
+                            prefixIcon: Icons.contact_support,
+                            title: 'Contact Us',
+                            onTap: () => Navigator.pushNamed(
+                                context, RouteName.accountdetail),
+                          ),
                           AccountSelection(
                               hidedivider: true,
                               size: size,
@@ -131,7 +139,7 @@ class AccountPage extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                      bottom: size.height * 0.17,
+                      bottom: size.height * 0.14,
                       right: 0,
                       left: 0,
                       child: AccountButton(
@@ -184,7 +192,7 @@ class AccountSelection extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(
               horizontal: size.width * 0.03, vertical: size.width * 0.03),
-          child: GestureDetector(
+          child: InkWell(
             onTap: onTap,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

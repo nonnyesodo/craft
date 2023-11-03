@@ -10,7 +10,7 @@ class CustomAppbar extends StatelessWidget {
     final size = MediaQuery.sizeOf(context);
     return Row(
       children: [
-        InkWell(
+        GestureDetector(
             onTap: () => Navigator.pop(context),
             child: Icon(Icons.arrow_back_ios,
                 size: 25.sp, color: Appcolors.white)),

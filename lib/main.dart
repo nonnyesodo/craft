@@ -1,6 +1,8 @@
 import 'package:craftman/config/page%20route/detail/route.dart';
 import 'package:craftman/config/page%20route/detail/route_name.dart';
+import 'package:craftman/features/account/presentation/bloc/cubit/account_cubit.dart';
 import 'package:craftman/features/authentication/presentation/bloc/cubit/auth_cubit.dart';
+import 'package:craftman/features/booking/presentation/bloc/cubit/booking_cubit.dart';
 import 'package:craftman/features/splash_onboarding/presentation/bloc/cubit/onboarding_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,6 +24,12 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => AuthCubit(),
+        ),
+        BlocProvider(
+          create: (context) => BookingCubit(),
+        ),
+        BlocProvider(
+          create: (context) => AccountCubit(),
         ),
       ],
       child: ScreenUtilInit(

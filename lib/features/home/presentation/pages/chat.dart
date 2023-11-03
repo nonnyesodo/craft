@@ -1,5 +1,5 @@
 import 'package:craftman/constants/export.dart';
-import 'package:craftman/features/home/presentation/widgets/export.dart';
+import 'package:craftman/features/home/presentation/widget/export.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../constants/export.dart';
-import '../../../splash_onboarding/data/local/onboarding_Images.dart';
+import '../../../../../constants/export.dart';
+import '../../../../splash_onboarding/data/local/onboarding_Images.dart';
 
 class ProfilePic extends StatelessWidget {
   const ProfilePic({

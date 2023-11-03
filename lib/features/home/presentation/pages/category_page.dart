@@ -1,6 +1,6 @@
 import 'package:craftman/constants/export.dart';
-import 'package:craftman/features/home/presentation/pages/home_screen.dart';
 import 'package:flutter/material.dart';
+import '../widget/export.dart';
 
 class Categories extends StatelessWidget {
   const Categories({super.key});

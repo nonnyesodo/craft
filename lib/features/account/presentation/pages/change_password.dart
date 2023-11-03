@@ -60,44 +60,39 @@ class ChangePasswordButon extends StatelessWidget {
 }
 
 class ChanePasswordTextfields extends StatelessWidget {
-  const ChanePasswordTextfields({
-    super.key,
-    required this.size,
-  });
+  const ChanePasswordTextfields({super.key, required this.size});
 
   final Size size;
 
   @override
   Widget build(BuildContext context) {
     return AppshadowContainer(
+        padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
         child: Column(
-      children: [
-        SizedBox(height: size.height * 0.02),
-        AcctTextfield(
-            hintext: 'Current Password',
-            obscure: true,
-            suffixicon: Icon(Icons.visibility, size: 25.sp)),
-        SizedBox(height: size.height * 0.02),
-        AcctTextfield(
-            hintext: 'New Password',
-            obscure: true,
-            suffixicon: Icon(Icons.visibility, size: 25.sp)),
-        SizedBox(height: size.height * 0.02),
-        AcctTextfield(
-            hintext: 'Confirm Password',
-            obscure: true,
-            suffixicon: Icon(Icons.visibility, size: 25.sp)),
-        SizedBox(height: size.height * 0.02),
-      ],
-    ));
+          children: [
+            SizedBox(height: size.height * 0.02),
+            AcctTextfield(
+                hintext: 'Current Password',
+                obscure: true,
+                suffixicon: Icon(Icons.visibility, size: 25.sp)),
+            SizedBox(height: size.height * 0.02),
+            AcctTextfield(
+                hintext: 'New Password',
+                obscure: true,
+                suffixicon: Icon(Icons.visibility, size: 25.sp)),
+            SizedBox(height: size.height * 0.02),
+            AcctTextfield(
+                hintext: 'Confirm Password',
+                obscure: true,
+                suffixicon: Icon(Icons.visibility, size: 25.sp)),
+            SizedBox(height: size.height * 0.02),
+          ],
+        ));
   }
 }
 
 class ChangepasswordAppbar extends StatelessWidget {
-  const ChangepasswordAppbar({
-    super.key,
-    required this.size,
-  });
+  const ChangepasswordAppbar({super.key, required this.size});
 
   final Size size;
 

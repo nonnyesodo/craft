@@ -28,6 +28,8 @@ class BottomNav extends StatelessWidget {
           BottomNavigationBarItem(
               icon: Icon(Icons.message, size: 35.sp), label: 'Messages'),
           BottomNavigationBarItem(
+              icon: Icon(Icons.assignment, size: 35.sp), label: 'Booking'),
+          BottomNavigationBarItem(
               icon: Icon(Icons.account_circle, size: 35.sp), label: 'Profile')
         ],
         currentIndex: watchOnboarding.bottonnavSelectedIndex,

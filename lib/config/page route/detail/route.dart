@@ -1,8 +1,11 @@
 import 'package:craftman/config/page%20route/detail/route_name.dart';
+import 'package:craftman/features/account/presentation/pages/account_details.dart';
 import 'package:craftman/features/account/presentation/pages/change_password.dart';
+import 'package:craftman/features/account/presentation/pages/service_provider_form.dart';
 import 'package:craftman/features/authentication/presentation/pages/login_page.dart';
 import 'package:craftman/features/authentication/presentation/pages/mobile_0tp.dart';
 import 'package:craftman/features/authentication/presentation/pages/signup_page.dart';
+import 'package:craftman/features/booking/presentation/pages/bookings_details.dart';
 import 'package:craftman/features/home/presentation/pages/category_page.dart';
 import 'package:craftman/features/home/presentation/pages/chat.dart';
 import 'package:craftman/features/home/presentation/pages/reviews.dart';
@@ -15,7 +18,6 @@ import 'package:craftman/features/splash_onboarding/presentation/pages/onboardin
 import 'package:craftman/features/splash_onboarding/presentation/pages/onboarding3.dart';
 import 'package:craftman/features/splash_onboarding/presentation/pages/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 
 import 'custom_page_route.dart';
 
@@ -52,6 +54,12 @@ class AppRoute {
         return CustomPageRoute(child: const Reviews());
       case RouteName.categories:
         return CustomPageRoute(child: const Categories());
+      case RouteName.accountdetail:
+        return CustomPageRoute(child: const AccountDetails());
+      case RouteName.bookingDeatail:
+        return CustomPageRoute(child: const BookingDetail());
+      case RouteName.serviceProviderform:
+        return CustomPageRoute(child: const ServiceProviderForm());
       default:
         return CustomPageRoute(child: const LoginPage());
     }

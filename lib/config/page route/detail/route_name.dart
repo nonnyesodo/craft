@@ -14,4 +14,7 @@ class RouteName {
   static const changepassword = '/changepassword';
   static const reviews = '/reviews';
   static const categories = '/categories';
+  static const accountdetail = '/accountdetail';
+  static const bookingDeatail = '/bookingdetail';
+  static const serviceProviderform = '/serviceproviderform';
 }

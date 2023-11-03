@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:country_code_picker/country_code_picker.dart';
 import 'package:craftman/config/page%20route/detail/route_name.dart';
 import 'package:craftman/constants/appcolors.dart';
 import 'package:craftman/constants/appscaffold.dart';
@@ -54,76 +51,40 @@ class SignupPage extends StatelessWidget {
                 ),
                 SizedBox(height: size.height * 0.025),
                 AuthTextfield(
-                  controller: watchAuthCubit.emailController,
-                  keyboardtype: TextInputType.emailAddress,
-                  validator: (value) {
-                    return null;
-                  },
-                  prefixicon: Icon(
-                    Icons.email_outlined,
-                    size: 25.sp,
-                  ),
-                  hintext: 'Email',
-                ),
-                SizedBox(height: size.height * 0.025),
-                AuthTextfield(
-                  controller: watchAuthCubit.phoneController,
-                  validator: (value) {
-                    return null;
-                  },
-                  keyboardtype: TextInputType.phone,
-                  prefixicon: SizedBox(
-                    width: size.width * 0.28,
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(left: size.width * 0.03),
-                          child: Icon(
-                            Icons.phone_android_outlined,
-                            size: 25.sp,
-                          ),
-                        ),
-                        CountryCodePicker(
-                          onChanged: (value) {
-                            watchAuthCubit.countrycode = value.toString();
-                            log(watchAuthCubit.countrycode);
-                            log(watchAuthCubit.passwordController.text
-                                .toString());
-                          },
-                          padding: EdgeInsets.zero,
-                          showFlag: false,
-                          initialSelection: 'NG',
-                          favorite: const ['NG'],
-                        )
-                      ],
-                    ),
-                  ),
-                  hintext: 'Mobile Number',
-                ),
-                SizedBox(height: size.height * 0.025),
-                AuthTextfield(
-                  controller: watchAuthCubit.passwordController,
-                  obscure: watchAuthCubit.showPassword,
-                  validator: (value) {
-                    return null;
-                  },
-                  suffixicon: InkWell(
-                    onTap: () {
-                      readAuthCubit.changeShowpassword();
+                    controller: watchAuthCubit.emailController,
+                    keyboardtype: TextInputType.emailAddress,
+                    validator: (value) {
+                      return null;
                     },
-                    child: Icon(
-                      watchAuthCubit.showPassword
-                          ? Icons.visibility
-                          : Icons.visibility_off,
-                      size: 22.sp,
-                    ),
-                  ),
-                  prefixicon: Icon(
-                    Icons.lock_outline,
-                    size: 25.sp,
-                  ),
-                  hintext: 'Password',
-                ),
+                    prefixicon: Icon(Icons.email_outlined, size: 25.sp),
+                    hintext: 'Email'),
+                SizedBox(height: size.height * 0.025),
+                AuthTextfield(
+                    controller: watchAuthCubit.phoneController,
+                    validator: (value) {
+                      return null;
+                    },
+                    keyboardtype: TextInputType.phone,
+                    prefixicon: Icon(Icons.phone_android_outlined, size: 25.sp),
+                    hintext: 'Mobile Number'),
+                SizedBox(height: size.height * 0.025),
+                AuthTextfield(
+                    controller: watchAuthCubit.passwordController,
+                    obscure: watchAuthCubit.showPassword,
+                    validator: (value) {
+                      return null;
+                    },
+                    suffixicon: InkWell(
+                        onTap: () {
+                          readAuthCubit.changeShowpassword();
+                        },
+                        child: Icon(
+                            watchAuthCubit.showPassword
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            size: 22.sp)),
+                    prefixicon: Icon(Icons.lock_outline, size: 25.sp),
+                    hintext: 'Password'),
                 SizedBox(height: size.height * 0.025),
                 Terms(
                   ontap: () {
