@@ -25,7 +25,7 @@ class AppText extends StatelessWidget {
       textAlign: textalign,
       softWrap: true,
       maxLines: maxline,
-      style: GoogleFonts.openSans(
+      style: GoogleFonts.poppins(
           fontSize: size.sp, fontWeight: fontweight, color: color),
     );
   }

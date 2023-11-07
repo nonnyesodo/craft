@@ -32,95 +32,75 @@ class LoginPage extends StatelessWidget {
               children: [
                 SizedBox(height: size.height * 0.02),
                 AppText(
-                  text: 'Login',
-                  fontweight: FontWeight.w800,
-                  color: Appcolors.blue,
-                  size: 30,
-                ),
-                SizedBox(height: size.height * 0.06),
+                    text: 'Login',
+                    fontweight: FontWeight.w800,
+                    color: Appcolors.blue,
+                    size: 30),
+                SizedBox(height: size.height * 0.04),
                 AuthTextfield(
-                  controller: watchAuthCubit.emailController,
-                  keyboardtype: TextInputType.emailAddress,
-                  validator: (value) {
-                    return null;
-                  },
-                  prefixicon: Icon(
-                    Icons.email_outlined,
-                    size: 25.sp,
-                  ),
-                  hintext: 'Email',
-                ),
+                    controller: watchAuthCubit.emailController,
+                    keyboardtype: TextInputType.emailAddress,
+                    validator: (value) {
+                      return null;
+                    },
+                    prefixicon: Icon(Icons.email_outlined, size: 25.sp),
+                    hintext: 'Email'),
                 SizedBox(height: size.height * 0.03),
                 AuthTextfield(
-                  controller: watchAuthCubit.passwordController,
-                  obscure: watchAuthCubit.showPassword,
-                  validator: (value) {
-                    return null;
-                  },
-                  suffixicon: InkWell(
-                    onTap: () {
-                      readAuthCubit.changeShowpassword();
+                    controller: watchAuthCubit.passwordController,
+                    obscure: watchAuthCubit.showPassword,
+                    validator: (value) {
+                      return null;
                     },
-                    child: Icon(
-                      watchAuthCubit.showPassword
-                          ? Icons.visibility
-                          : Icons.visibility_off,
-                      size: 22.sp,
-                    ),
-                  ),
-                  prefixicon: Icon(
-                    Icons.lock_outline,
-                    size: 25.sp,
-                  ),
-                  hintext: 'Password',
-                ),
+                    suffixicon: InkWell(
+                        onTap: () {
+                          readAuthCubit.changeShowpassword();
+                        },
+                        child: Icon(
+                            watchAuthCubit.showPassword
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            size: 22.sp)),
+                    prefixicon: Icon(Icons.lock_outline, size: 25.sp),
+                    hintext: 'Password'),
                 SizedBox(height: size.height * 0.025),
                 Align(
-                  alignment: Alignment.centerRight,
-                  child: AppText(
-                    text: 'Forget Password?',
-                    size: 14,
-                    color: Appcolors.blue,
-                    fontweight: FontWeight.w700,
-                  ),
-                ),
+                    alignment: Alignment.centerRight,
+                    child: AppText(
+                        text: 'Forget Password?',
+                        size: 14,
+                        color: Appcolors.blue,
+                        fontweight: FontWeight.w700)),
                 SizedBox(height: size.height * 0.02),
                 Terms(
-                  ontap: () {
-                    readAuthCubit.changeStaylogin();
-                  },
-                  size: size,
-                  title: 'Stay Loged In ',
-                  status: watchAuthCubit.stayLogin,
-                ),
+                    ontap: () {
+                      readAuthCubit.changeStaylogin();
+                    },
+                    size: size,
+                    title: 'Stay Loged In ',
+                    status: watchAuthCubit.stayLogin),
                 SizedBox(height: size.height * 0.04),
                 AuthButton(
-                  isloading: watchAuthCubit.state is AuthLoadingState,
-                  width: size.width,
-                  height: size.width * 0.13,
-                  radius: size.width * 0.03,
-                  ontap: () {},
-                  child: AppText(
-                    text: 'Login',
-                    color: Appcolors.blue,
-                    fontweight: FontWeight.w700,
-                    size: 20,
-                  ),
-                ),
+                    isloading: watchAuthCubit.state is AuthLoadingState,
+                    width: size.width,
+                    height: size.width * 0.13,
+                    radius: size.width * 0.03,
+                    ontap: () {},
+                    child: AppText(
+                        text: 'Login',
+                        color: Appcolors.blue,
+                        fontweight: FontWeight.w700,
+                        size: 20)),
                 SizedBox(height: size.height * 0.02),
                 SignupOrLogin(
-                  ontap: () {
-                    Navigator.pushNamed(context, RouteName.signup);
-                  },
-                  subTitle: 'Signup',
-                  title: 'Don\'t have an account?',
-                ),
-                SizedBox(height: size.height * 0.02),
-                Image.asset(
-                  OnboardingImages.splash,
-                  height: size.height * 0.15,
-                  width: size.width * 0.9,
-                ),
+                    ontap: () {
+                      Navigator.pushNamed(context, RouteName.signup);
+                    },
+                    subTitle: 'Signup',
+                    title: 'Don\'t have an account?'),
+                SizedBox(height: size.height * 0.08),
+                Image.asset(OnboardingImages.splash,
+                    height: size.height * 0.15, width: size.width * 0.9),
               ],
             ),
           ),

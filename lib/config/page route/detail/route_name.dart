@@ -17,4 +17,6 @@ class RouteName {
   static const accountdetail = '/accountdetail';
   static const bookingDeatail = '/bookingdetail';
   static const serviceProviderform = '/serviceproviderform';
+  static const contactUs = '/contactUs';
+  static const notification = '/notification';
 }

@@ -1,8 +1,8 @@
 import 'package:craftman/config/page%20route/detail/route_name.dart';
 import 'package:craftman/constants/export.dart';
 import 'package:craftman/features/account/presentation/bloc/cubit/account_cubit.dart';
-import 'package:craftman/features/account/presentation/widgets/account_button.dart';
-import 'package:craftman/features/account/presentation/widgets/account_textfield.dart';
+import 'package:craftman/features/account/presentation/widgets/src/account_button.dart';
+import 'package:craftman/features/account/presentation/widgets/src/account_textfield.dart';
 import 'package:craftman/features/home/presentation/widget/src/profile_pic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -50,7 +50,7 @@ class AccountDetails extends StatelessWidget {
                             isDismissible: false,
                             context: context,
                             builder: ((context) {
-                              return ChangeProfilePixModalSheet();
+                              return const ChangeProfilePixModalSheet();
                             })),
                         child: CircleAvatar(
                           backgroundColor: Appcolors.orange,
@@ -79,6 +79,7 @@ class AccountDetails extends StatelessWidget {
                       right: 0,
                       top: size.height * 0.2,
                       child: AcctDetailInputfield(
+                          keyboardtype: TextInputType.number,
                           onTaptoEnable: () => readAccCubit
                               .selectAcctfieldToEnable(enablefield: 'Phone'),
                           prefixIcon: Icon(Icons.phone_android, size: 20.sp),
@@ -94,12 +95,13 @@ class AccountDetails extends StatelessWidget {
                       right: 0,
                       top: size.height * 0.3,
                       child: AcctDetailInputfield(
+                        keyboardtype: TextInputType.emailAddress,
                         size: size,
                         prefixIcon: Icon(Icons.email, size: 20.sp),
                         label: 'Email',
                         enable: false,
                         showsufixicon: false,
-                        editIconColor: watchAccCubit.enableAcctfield == 'Phone'
+                        editIconColor: watchAccCubit.enableAcctfield == 'email'
                             ? Appcolors.green
                             : Appcolors.lightgrey,
                       )),
@@ -138,10 +140,11 @@ class AccountDetails extends StatelessWidget {
                       right: 0,
                       top: size.height * 0.65,
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           AppText(
                               text: 'Want to become a service provider? ',
-                              size: 14,
+                              size: 12,
                               color: Appcolors.blue),
                           GestureDetector(
                             onTap: () => Navigator.pushNamed(
@@ -149,7 +152,7 @@ class AccountDetails extends StatelessWidget {
                             child: AppText(
                                 maxline: 2,
                                 text: 'Click Here ',
-                                size: 15,
+                                size: 14,
                                 fontweight: FontWeight.w600,
                                 color: Appcolors.orange),
                           ),
@@ -169,50 +172,58 @@ class ChangeProfilePixModalSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        SizedBox(height: size.height * 0.04),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Column(
-              children: [
-                Icon(Icons.camera, size: 25.sp, color: Appcolors.blue),
-                AppText(
-                    text: 'Camera',
-                    color: Appcolors.blue,
-                    fontweight: FontWeight.w500)
-              ],
-            ),
-            SizedBox(width: size.width * 0.2),
-            Column(
-              children: [
-                Icon(Icons.photo_library, size: 25.sp),
-                AppText(
-                    text: 'Gallery',
-                    color: Appcolors.blue,
-                    fontweight: FontWeight.w500)
-              ],
-            ),
-          ],
-        ),
-        SizedBox(height: size.height * 0.04),
-        GestureDetector(
-          onTap: () => Navigator.pop(context),
-          child: Row(
+    return Container(
+      width: size.width,
+      decoration: BoxDecoration(
+          color: Appcolors.white,
+          borderRadius: BorderRadius.only(
+              topRight: Radius.circular(size.width * 0.03),
+              topLeft: Radius.circular(size.width * 0.03))),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(height: size.height * 0.04),
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.cancel, color: Appcolors.redColor, size: 25.sp),
-              AppText(
-                  text: 'Cancel',
-                  color: Appcolors.redColor,
-                  fontweight: FontWeight.w800),
+              Column(
+                children: [
+                  Icon(Icons.camera, size: 25.sp, color: Appcolors.blue),
+                  AppText(
+                      text: 'Camera',
+                      color: Appcolors.blue,
+                      fontweight: FontWeight.w500)
+                ],
+              ),
+              SizedBox(width: size.width * 0.2),
+              Column(
+                children: [
+                  Icon(Icons.photo_library, size: 25.sp),
+                  AppText(
+                      text: 'Gallery',
+                      color: Appcolors.blue,
+                      fontweight: FontWeight.w500)
+                ],
+              ),
             ],
           ),
-        ),
-        SizedBox(height: size.height * 0.04),
-      ],
+          SizedBox(height: size.height * 0.04),
+          GestureDetector(
+            onTap: () => Navigator.pop(context),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.cancel, color: Appcolors.redColor, size: 25.sp),
+                AppText(
+                    text: 'Cancel',
+                    color: Appcolors.redColor,
+                    fontweight: FontWeight.w800),
+              ],
+            ),
+          ),
+          SizedBox(height: size.height * 0.04),
+        ],
+      ),
     );
   }
 }

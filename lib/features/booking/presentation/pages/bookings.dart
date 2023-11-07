@@ -24,6 +24,7 @@ class Bookings extends StatelessWidget {
               color: Appcolors.white,
               child: Column(
                 children: [
+                  SizedBox(height: size.height * 0.02),
                   BookingFilter(size: size),
                   SizedBox(height: size.height * 0.02),
                   AllBookings(size: size)

@@ -23,7 +23,7 @@ class AcctTextfield extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var noboder = const OutlineInputBorder(borderSide: BorderSide.none);
+    // var noboder = const Inputborder.none;
     final size = MediaQuery.sizeOf(context);
     return TextFormField(
       enabled: enabled,
@@ -47,19 +47,20 @@ class AcctTextfield extends StatelessWidget {
           filled: noborder ? false : true,
           fillColor: Appcolors.lightgrey.withOpacity(0.3),
           contentPadding: noborder
-              ? EdgeInsets.zero
+              ? EdgeInsets.only(bottom: size.width * 0.035)
               : EdgeInsets.symmetric(
                   horizontal: size.width * 0.02, vertical: size.width * 0.04),
           prefixIcon: prefixicon,
           suffixIcon: suffixicon,
           hintText: hintext,
+          border: InputBorder.none,
           focusedBorder: noborder
-              ? noboder
+              ? InputBorder.none
               : OutlineInputBorder(
                   borderRadius: BorderRadius.circular(size.width * 0.02),
                   borderSide: BorderSide(color: Appcolors.orange)),
           enabledBorder: noborder
-              ? noboder
+              ? InputBorder.none
               : OutlineInputBorder(
                   borderRadius: BorderRadius.circular(size.width * 0.02),
                   borderSide: BorderSide(color: Appcolors.lightgrey))),

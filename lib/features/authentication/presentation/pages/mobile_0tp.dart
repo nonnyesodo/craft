@@ -27,40 +27,30 @@ class MobileOtp extends StatelessWidget {
           child: SingleChildScrollView(
             controller: ScrollController(),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: size.height * 0.07),
+                // SizedBox(height: size.height * 0.07),
                 AppText(
-                  text: 'Verify Mobile Number',
-                  fontweight: FontWeight.w800,
-                  color: Appcolors.blue,
-                  size: 25,
-                ),
+                    text: 'Verify Mobile Number',
+                    fontweight: FontWeight.w800,
+                    color: Appcolors.blue,
+                    size: 25),
                 SizedBox(height: size.height * 0.04),
                 AppText(
-                    fontweight: FontWeight.w600,
-                    textalign: TextAlign.center,
                     text:
                         'we have sent a 6digit otp to ${watchAuthCubit.countrycode} ${watchAuthCubit.phoneController.text}'),
                 SizedBox(height: size.height * 0.025),
-                SizedBox(
-                  width: size.width,
-                  child: PinCodeTextField(
-                    onChanged: (value) {},
-                    pinTheme: PinTheme(
-                        activeColor: Appcolors.orange,
-                        inactiveColor: Appcolors.lightgrey,
-                        selectedColor: Appcolors.blue,
-
-                        // fieldOuterPadding: EdgeInsets.symmetric(
-                        //     horizontal: size.width * 0.002),
-                        borderRadius: BorderRadius.circular(size.width * 0.03),
-                        shape: PinCodeFieldShape.box,
-                        fieldHeight: size.height * 0.07,
-                        fieldWidth: size.height * 0.07),
-                    appContext: context,
-                    length: 6,
-                  ),
+                PinCodeTextField(
+                  pinTheme: PinTheme(
+                      activeColor: Appcolors.orange,
+                      inactiveColor: Appcolors.lightgrey,
+                      selectedColor: Appcolors.blue,
+                      borderRadius: BorderRadius.circular(size.width * 0.03),
+                      shape: PinCodeFieldShape.box,
+                      fieldHeight: size.height * 0.07,
+                      fieldWidth: size.height * 0.07),
+                  appContext: context,
+                  length: 6,
                 ),
                 SizedBox(height: size.height * 0.02),
                 Row(

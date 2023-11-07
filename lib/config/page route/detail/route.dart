@@ -1,6 +1,8 @@
 import 'package:craftman/config/page%20route/detail/route_name.dart';
 import 'package:craftman/features/account/presentation/pages/account_details.dart';
 import 'package:craftman/features/account/presentation/pages/change_password.dart';
+import 'package:craftman/features/account/presentation/pages/contact_us.dart';
+import 'package:craftman/features/account/presentation/pages/notifications.dart';
 import 'package:craftman/features/account/presentation/pages/service_provider_form.dart';
 import 'package:craftman/features/authentication/presentation/pages/login_page.dart';
 import 'package:craftman/features/authentication/presentation/pages/mobile_0tp.dart';
@@ -60,6 +62,10 @@ class AppRoute {
         return CustomPageRoute(child: const BookingDetail());
       case RouteName.serviceProviderform:
         return CustomPageRoute(child: const ServiceProviderForm());
+      case RouteName.contactUs:
+        return CustomPageRoute(child: const ContactUs());
+      case RouteName.notification:
+        return CustomPageRoute(child: const Notifications());
       default:
         return CustomPageRoute(child: const LoginPage());
     }

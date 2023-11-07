@@ -32,12 +32,11 @@ class SignupPage extends StatelessWidget {
               children: [
                 SizedBox(height: size.height * 0.02),
                 AppText(
-                  text: 'Signup',
-                  fontweight: FontWeight.w800,
-                  color: Appcolors.blue,
-                  size: 30,
-                ),
-                SizedBox(height: size.height * 0.06),
+                    text: 'Signup',
+                    fontweight: FontWeight.w800,
+                    color: Appcolors.blue,
+                    size: 30),
+                SizedBox(height: size.height * 0.04),
                 AuthTextfield(
                   controller: watchAuthCubit.fullnameController,
                   validator: (value) {
@@ -119,7 +118,7 @@ class SignupPage extends StatelessWidget {
                   subTitle: 'Login',
                   title: 'Already have an account?',
                 ),
-                SizedBox(height: size.height * 0.02),
+                SizedBox(height: size.height * 0.04),
                 Image.asset(
                   OnboardingImages.splash,
                   height: size.height * 0.15,

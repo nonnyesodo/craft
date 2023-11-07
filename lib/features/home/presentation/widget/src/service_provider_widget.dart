@@ -244,7 +244,11 @@ class BookNow extends StatelessWidget {
                   color: Appcolors.white,
                   size: 16,
                   fontweight: FontWeight.w600),
-              ontap: () => Navigator.pushNamed(context, RouteName.categories)),
+              ontap: () => showDialog(
+                  context: context,
+                  builder: (context) {
+                    return BookingSuccesDialog(size: size);
+                  })),
           // SizedBox(width: size.width * 0.1),
           CircleAvatar(
             radius: 25.sp,
@@ -269,6 +273,59 @@ class BookNow extends StatelessWidget {
                 child: Icon(Icons.phone, size: 25.sp, color: Appcolors.green)),
           )
         ],
+      ),
+    );
+  }
+}
+
+class BookingSuccesDialog extends StatelessWidget {
+  const BookingSuccesDialog({super.key, required this.size});
+
+  final Size size;
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog.adaptive(
+      backgroundColor: Appcolors.white,
+      contentPadding: EdgeInsets.zero,
+      content: Container(
+        padding: EdgeInsets.symmetric(
+            horizontal: size.width * 0.03, vertical: size.width * 0.06),
+        decoration: BoxDecoration(
+            color: Appcolors.white,
+            borderRadius: BorderRadius.circular(size.width * 0.03)),
+        width: size.width,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.assignment, size: 70.sp, color: Appcolors.blue),
+            SizedBox(height: size.height * 0.02),
+            AppText(
+                text: 'Booking Confirmed',
+                fontweight: FontWeight.w700,
+                size: 20,
+                color: Appcolors.blue),
+            SizedBox(height: size.height * 0.005),
+            AppText(
+              textalign: TextAlign.center,
+              text: 'Your booking has been successfully confirmed!',
+              size: 14,
+              color: Appcolors.blue,
+            ),
+            SizedBox(height: size.height * 0.03),
+            HomeButton(
+              width: size.width,
+              height: size.height * 0.06,
+              radius: size.width * 0.03,
+              ontap: () {},
+              child: AppText(
+                  text: 'Confirm',
+                  color: Appcolors.white,
+                  size: 16,
+                  fontweight: FontWeight.w600),
+            )
+          ],
+        ),
       ),
     );
   }
