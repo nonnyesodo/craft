@@ -36,7 +36,16 @@ class SignupPage extends StatelessWidget {
                     fontweight: FontWeight.w800,
                     color: Appcolors.blue,
                     size: 30),
-                SizedBox(height: size.height * 0.04),
+                SizedBox(height: size.height * 0.01),
+                AppText(
+                    text: 'Create New Account',
+                    fontweight: FontWeight.w600,
+                    color: Appcolors.blue),
+                AppText(
+                    text: 'Complete form to create new account',
+                    size: 16,
+                    color: Appcolors.lightgrey),
+                SizedBox(height: size.height * 0.01),
                 AuthTextfield(
                   controller: watchAuthCubit.fullnameController,
                   validator: (value) {
@@ -105,7 +114,7 @@ class SignupPage extends StatelessWidget {
                   },
                   child: AppText(
                     text: 'Signup',
-                    color: Appcolors.blue,
+                    color: Appcolors.white,
                     fontweight: FontWeight.w700,
                     size: 20,
                   ),

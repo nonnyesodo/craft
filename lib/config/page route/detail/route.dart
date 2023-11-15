@@ -4,6 +4,7 @@ import 'package:craftman/features/account/presentation/pages/change_password.dar
 import 'package:craftman/features/account/presentation/pages/contact_us.dart';
 import 'package:craftman/features/account/presentation/pages/notifications.dart';
 import 'package:craftman/features/account/presentation/pages/service_provider_form.dart';
+import 'package:craftman/features/authentication/presentation/pages/email_otp.dart';
 import 'package:craftman/features/authentication/presentation/pages/login_page.dart';
 import 'package:craftman/features/authentication/presentation/pages/mobile_0tp.dart';
 import 'package:craftman/features/authentication/presentation/pages/signup_page.dart';
@@ -52,6 +53,8 @@ class AppRoute {
         return CustomPageRoute(child: const Chats());
       case RouteName.changepassword:
         return CustomPageRoute(child: const ChangePassword());
+      case RouteName.emailotp:
+        return CustomPageRoute(child: const EmailOtp());
       case RouteName.reviews:
         return CustomPageRoute(child: const Reviews());
       case RouteName.categories:

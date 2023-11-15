@@ -7,6 +7,7 @@ class RouteName {
   static const bottomNav = '/bottomnav';
   static const signup = '/signup';
   static const mobileOtp = '/mobileotp';
+  static const emailotp = '/emailotp';
   static const login = '/login';
   static const skilldetail = '/skillsdetail';
   static const serviceproviderdetail = '/serviceproviderdetail';

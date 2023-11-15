@@ -36,7 +36,16 @@ class LoginPage extends StatelessWidget {
                     fontweight: FontWeight.w800,
                     color: Appcolors.blue,
                     size: 30),
-                SizedBox(height: size.height * 0.04),
+                SizedBox(height: size.height * 0.01),
+                AppText(
+                    text: 'Glad to have you Back!',
+                    fontweight: FontWeight.w600,
+                    color: Appcolors.blue),
+                AppText(
+                    text: 'Login to cotinue',
+                    color: Appcolors.lightgrey,
+                    size: 16),
+                SizedBox(height: size.height * 0.02),
                 AuthTextfield(
                     controller: watchAuthCubit.emailController,
                     keyboardtype: TextInputType.emailAddress,
@@ -88,7 +97,7 @@ class LoginPage extends StatelessWidget {
                     ontap: () {},
                     child: AppText(
                         text: 'Login',
-                        color: Appcolors.blue,
+                        color: Appcolors.white,
                         fontweight: FontWeight.w700,
                         size: 20)),
                 SizedBox(height: size.height * 0.02),

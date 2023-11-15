@@ -9,8 +9,8 @@ import '../../../splash_onboarding/data/local/onboarding_images.dart';
 import '../bloc/cubit/auth_cubit.dart';
 import '../widget/export.dart';
 
-class MobileOtp extends StatelessWidget {
-  const MobileOtp({super.key});
+class EmailOtp extends StatelessWidget {
+  const EmailOtp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class MobileOtp extends StatelessWidget {
               children: [
                 // SizedBox(height: size.height * 0.07),
                 AppText(
-                    text: 'Phone Verification',
+                    text: 'Email Verification',
                     fontweight: FontWeight.w800,
                     color: Appcolors.blue,
                     size: 22),
@@ -40,7 +40,7 @@ class MobileOtp extends StatelessWidget {
                     size: 16,
                     color: Appcolors.blue,
                     text:
-                        'we have sent an SMS with 6digit Code to ${watchAuthCubit.countrycode} ${watchAuthCubit.phoneController.text}'),
+                        'we have sent a Mail with 6digit Code to ${watchAuthCubit.emailController.text}'),
                 SizedBox(height: size.height * 0.01),
                 AppText(
                     text: 'Enter code to procced ',
@@ -78,18 +78,20 @@ class MobileOtp extends StatelessWidget {
                 ),
                 SizedBox(height: size.height * 0.05),
                 AuthButton(
-                    isloading: watchAuthCubit.state is AuthLoadingState,
-                    width: size.width,
-                    height: size.width * 0.13,
-                    radius: size.width * 0.03,
-                    ontap: () {
-                      Navigator.pushNamed(context, RouteName.emailotp);
-                    },
-                    child: AppText(
-                        text: 'Proceed',
-                        color: Appcolors.white,
-                        fontweight: FontWeight.w700,
-                        size: 20)),
+                  isloading: watchAuthCubit.state is AuthLoadingState,
+                  width: size.width,
+                  height: size.width * 0.13,
+                  radius: size.width * 0.03,
+                  ontap: () {
+                    Navigator.pushNamed(context, RouteName.bottomNav);
+                  },
+                  child: AppText(
+                    text: 'Proceed',
+                    color: Appcolors.white,
+                    fontweight: FontWeight.w700,
+                    size: 20,
+                  ),
+                ),
                 SizedBox(height: size.height * 0.02),
                 SizedBox(height: size.height * 0.02),
                 Image.asset(
