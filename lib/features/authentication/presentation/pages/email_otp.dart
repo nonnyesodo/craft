@@ -1,13 +1,13 @@
 import 'package:craftman/config/page%20route/detail/route_name.dart';
+import 'package:craftman/features/authentication/presentation/pages/mobile_0tp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
 import '../../../../constants/appcolors.dart';
 import '../../../../constants/appscaffold.dart';
 import '../../../../constants/apptext.dart';
 import '../../../splash_onboarding/data/local/onboarding_images.dart';
 import '../bloc/cubit/auth_cubit.dart';
-import '../widget/export.dart';
+import '../src/auth_widgets_export.dart';
 
 class EmailOtp extends StatelessWidget {
   const EmailOtp({super.key});
@@ -29,7 +29,7 @@ class EmailOtp extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // SizedBox(height: size.height * 0.07),
+                SizedBox(height: size.height * 0.03),
                 AppText(
                     text: 'Email Verification',
                     fontweight: FontWeight.w800,
@@ -41,42 +41,29 @@ class EmailOtp extends StatelessWidget {
                     color: Appcolors.blue,
                     text:
                         'we have sent a Mail with 6digit Code to ${watchAuthCubit.emailController.text}'),
-                SizedBox(height: size.height * 0.01),
+                SizedBox(height: size.height * 0.02),
                 AppText(
                     text: 'Enter code to procced ',
                     size: 16,
                     color: Appcolors.blue),
-                SizedBox(height: size.height * 0.015),
-                PinCodeTextField(
-                  pinTheme: PinTheme(
-                      activeColor: Appcolors.orange,
-                      inactiveColor: Appcolors.lightgrey,
-                      selectedColor: Appcolors.blue,
-                      borderRadius: BorderRadius.circular(size.width * 0.03),
-                      shape: PinCodeFieldShape.box,
-                      fieldHeight: size.height * 0.07,
-                      fieldWidth: size.height * 0.07),
-                  appContext: context,
-                  length: 6,
-                ),
-                SizedBox(height: size.height * 0.025),
+                SizedBox(height: size.height * 0.04),
+                CustomOtpField(),
+                SizedBox(height: size.height * 0.035),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     AppText(
-                      fontweight: FontWeight.w700,
-                      size: 14,
-                      text: 'Resend',
-                      color: Appcolors.blue,
-                    ),
+                        fontweight: FontWeight.w700,
+                        size: 14,
+                        text: 'Resend',
+                        color: Appcolors.blue),
                     AppText(
-                      size: 14,
-                      text: 'Expires In 00:23',
-                      color: Appcolors.orange,
-                    )
+                        size: 14,
+                        text: 'Expires In 00:23',
+                        color: Appcolors.orange)
                   ],
                 ),
-                SizedBox(height: size.height * 0.05),
+                SizedBox(height: size.height * 0.08),
                 AuthButton(
                   isloading: watchAuthCubit.state is AuthLoadingState,
                   width: size.width,
@@ -92,13 +79,11 @@ class EmailOtp extends StatelessWidget {
                     size: 20,
                   ),
                 ),
-                SizedBox(height: size.height * 0.02),
-                SizedBox(height: size.height * 0.02),
-                Image.asset(
-                  OnboardingImages.splash,
-                  height: size.height * 0.15,
-                  width: size.width * 0.9,
-                ),
+                SizedBox(height: size.height * 0.04),
+                Image.asset(OnboardingImages.splash,
+                    fit: BoxFit.contain,
+                    height: size.height * 0.15,
+                    width: size.width * 0.9),
               ],
             ),
           ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../constants/appcolors.dart';
+import '../../../../../constants/appcolors.dart';
 
 class AuthCheckbox extends StatelessWidget {
   const AuthCheckbox(

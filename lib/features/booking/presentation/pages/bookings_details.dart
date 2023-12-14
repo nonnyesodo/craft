@@ -1,4 +1,4 @@
-import 'package:craftman/features/authentication/presentation/widget/export.dart';
+import 'package:craftman/features/authentication/presentation/src/auth_widgets_export.dart';
 import 'package:craftman/features/booking/presentation/bloc/cubit/booking_cubit.dart';
 import 'package:craftman/features/booking/presentation/widgets/exports.dart';
 import 'package:craftman/features/home/presentation/widget/export.dart';

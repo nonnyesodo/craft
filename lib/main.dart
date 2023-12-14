@@ -7,8 +7,11 @@ import 'package:craftman/features/splash_onboarding/presentation/bloc/cubit/onbo
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
@@ -19,33 +22,25 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => OnboardingCubit(),
-        ),
-        BlocProvider(
-          create: (context) => AuthCubit(),
-        ),
-        BlocProvider(
-          create: (context) => BookingCubit(),
-        ),
-        BlocProvider(
-          create: (context) => AccountCubit(),
-        ),
+        BlocProvider(create: (context) => OnboardingCubit()),
+        BlocProvider(create: (context) => AuthCubit()),
+        BlocProvider(create: (context) => BookingCubit()),
+        BlocProvider(create: (context) => AccountCubit()),
       ],
       child: ScreenUtilInit(
           minTextAdapt: true,
           splitScreenMode: true,
+          designSize: MediaQuery.sizeOf(context),
           builder: (context, child) {
             return MaterialApp(
-              debugShowCheckedModeBanner: false,
-              title: 'Flutter Demo',
-              theme: ThemeData(
-                colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-                useMaterial3: true,
-              ),
-              initialRoute: RouteName.splash,
-              onGenerateRoute: AppRoute.onGeneratedRoute,
-            );
+                debugShowCheckedModeBanner: false,
+                title: 'Craftman',
+                theme: ThemeData(
+                    colorScheme:
+                        ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+                    useMaterial3: true),
+                initialRoute: RouteName.splash,
+                onGenerateRoute: AppRoute.onGeneratedRoute);
           }),
     );
   }

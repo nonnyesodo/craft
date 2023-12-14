@@ -45,7 +45,7 @@ class FirstOnboarding extends StatelessWidget {
                   SizedBox(
                     width: size.width,
                     child: const AppText(
-                        maxline: 4,
+                        maxline: 5,
                         text:
                             'Whether you need a quick fix or a major repair , we\'ve got you covered. With our service app. you can get the fix you need with just a few clicks! '),
                   ),

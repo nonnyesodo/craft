@@ -7,7 +7,7 @@ import '../../../../constants/appscaffold.dart';
 import '../../../../constants/apptext.dart';
 import '../../../splash_onboarding/data/local/onboarding_Images.dart';
 import '../bloc/cubit/auth_cubit.dart';
-import '../widget/export.dart';
+import '../src/auth_widgets_export.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -38,7 +38,7 @@ class LoginPage extends StatelessWidget {
                     size: 30),
                 SizedBox(height: size.height * 0.01),
                 AppText(
-                    text: 'Glad to have you Back!',
+                    text: 'Welcome  Back!',
                     fontweight: FontWeight.w600,
                     color: Appcolors.blue),
                 AppText(

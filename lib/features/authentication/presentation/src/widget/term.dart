@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../constants/appcolors.dart';
-import '../../../../constants/apptext.dart';
+import '../../../../../constants/appcolors.dart';
+import '../../../../../constants/apptext.dart';
 import 'auth_checkbox.dart';
 
 class Terms extends StatelessWidget {

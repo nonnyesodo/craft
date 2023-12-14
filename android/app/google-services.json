@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "298475472884",
+    "project_id": "craftman-f856e",
+    "storage_bucket": "craftman-f856e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:298475472884:android:8a549ca55ca49b04ed1ba1",
+        "android_client_info": {
+          "package_name": "com.example.craftman"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpjyAC5zmZ5bStWpIO9j-f4HwHhhN5Zfo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
