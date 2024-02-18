@@ -13,6 +13,10 @@ final class OnboardingLoadingState extends OnboardingState {}
 
 final class OnboardingLoadedState extends OnboardingState {}
 
+final class Newuserstate extends OnboardingState {}
+
+final class AutoLoginState extends OnboardingState {}
+
 final class OnboardingError extends OnboardingState {
   final String error;
   const OnboardingError({required this.error});

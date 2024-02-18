@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 
 import '../../../../../constants/export.dart';
 import '../export.dart';
@@ -115,19 +114,19 @@ class RatingProgressBar extends StatelessWidget {
                       text: '${index + 1}',
                       color: Appcolors.blue,
                       fontweight: FontWeight.w600),
-                  LinearPercentIndicator(
-                    // animateFromLastPercent: true,
-                    // restartAnimation: true,
-                    animationDuration: 500,
-                    animation: true,
-                    padding: EdgeInsets.zero,
-                    barRadius: Radius.circular(size.width * 0.02),
-                    width: size.width * 0.7,
-                    lineHeight: size.height * 0.01,
-                    percent: 0.8,
-                    backgroundColor: Appcolors.lightgrey,
-                    progressColor: Appcolors.orange,
-                  ),
+                  // LinearPercentIndicator(
+                  //   // animateFromLastPercent: true,
+                  //   // restartAnimation: true,
+                  //   animationDuration: 500,
+                  //   animation: true,
+                  //   padding: EdgeInsets.zero,
+                  //   barRadius: Radius.circular(size.width * 0.02),
+                  //   width: size.width * 0.7,
+                  //   lineHeight: size.height * 0.01,
+                  //   percent: 0.8,
+                  //   backgroundColor: Appcolors.lightgrey,
+                  //   progressColor: Appcolors.orange,
+                  // ),
                   AppText(
                       text: '40%',
                       color: Appcolors.blue,

@@ -50,19 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCpjyAC5zmZ5bStWpIO9j-f4HwHhhN5Zfo',
-    appId: '1:298475472884:android:8a549ca55ca49b04ed1ba1',
-    messagingSenderId: '298475472884',
-    projectId: 'craftman-f856e',
-    storageBucket: 'craftman-f856e.appspot.com',
+    apiKey: 'AIzaSyCVNNmcYvX5OKdnBe82JrStzTQQBRna4A0',
+    appId: '1:537640911627:android:3bdcd156e99c35f401980e',
+    messagingSenderId: '537640911627',
+    projectId: 'craftman-a20ba',
+    storageBucket: 'craftman-a20ba.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDUxwgTtEqhtmS_kEVkuF-jiooILyFLui0',
-    appId: '1:298475472884:ios:dab890c765c6e8e7ed1ba1',
-    messagingSenderId: '298475472884',
-    projectId: 'craftman-f856e',
-    storageBucket: 'craftman-f856e.appspot.com',
-    iosBundleId: 'com.example.craftman',
+    apiKey: 'AIzaSyCFcqD9JYG_hT0T_BKCO2EKIQmwlP2QpqM',
+    appId: '1:537640911627:ios:5f8b0103f107d4c301980e',
+    messagingSenderId: '537640911627',
+    projectId: 'craftman-a20ba',
+    storageBucket: 'craftman-a20ba.appspot.com',
+    iosBundleId: 'com.craftman',
   );
 }

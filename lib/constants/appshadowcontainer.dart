@@ -7,14 +7,16 @@ class AppshadowContainer extends StatelessWidget {
       {super.key,
       this.child,
       this.shadowcolour,
+      this.color,
       this.padding,
       this.margin,
       this.width,
-      this.height});
+      this.height,
+      this.radius});
   final Widget? child;
-  final Color? shadowcolour;
+  final Color? shadowcolour, color;
   final EdgeInsetsGeometry? padding, margin;
-  final double? width, height;
+  final double? width, height, radius;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
@@ -24,7 +26,7 @@ class AppshadowContainer extends StatelessWidget {
       margin: margin,
       padding: padding,
       decoration: BoxDecoration(
-          color: Appcolors.white,
+          color: color ?? Appcolors.white,
           boxShadow: [
             BoxShadow(
                 color: shadowcolour ?? Appcolors.lightgrey,
@@ -32,7 +34,7 @@ class AppshadowContainer extends StatelessWidget {
                 offset: const Offset(0, 8),
                 spreadRadius: 0)
           ],
-          borderRadius: BorderRadius.circular(size.width * 0.03)),
+          borderRadius: BorderRadius.circular(radius ?? size.width * 0.03)),
       child: child,
     );
   }

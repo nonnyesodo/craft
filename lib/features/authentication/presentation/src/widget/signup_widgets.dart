@@ -1,3 +1,4 @@
+import 'package:craftman/features/authentication/data/local/auth_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,7 +7,8 @@ import '../../bloc/cubit/auth_cubit.dart';
 import '../auth_widgets_export.dart';
 
 class SignupButton extends StatelessWidget {
-  const SignupButton({super.key});
+  const SignupButton({super.key, this.formKey});
+  final formKey;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,9 @@ class SignupButton extends StatelessWidget {
         height: size.width * 0.13,
         radius: size.width * 0.03,
         ontap: () {
-          context.read<AuthCubit>().firebaseSendToken();
+          formKey.currentState.validate()
+              ? context.read<AuthCubit>().firebaseSendToken()
+              : () {};
         },
         child: AppText(
             text: 'Signup',
@@ -56,7 +60,7 @@ class SignupPasswodtTextfield extends StatelessWidget {
         controller: watchAuthCubit.passwordController,
         obscure: watchAuthCubit.showPassword,
         validator: (value) {
-          return null;
+          return AuthValidator.validatePassword(value!);
         },
         suffixicon: InkWell(
             onTap: () {
@@ -81,7 +85,7 @@ class SignupPhoneTextField extends StatelessWidget {
     return AuthTextfield(
         controller: watchAuthCubit.phoneController,
         validator: (value) {
-          return null;
+          return AuthValidator.validateMobile(value!);
         },
         keyboardtype: TextInputType.phone,
         prefixicon: Icon(Icons.phone_android_outlined, size: 25.sp),
@@ -99,39 +103,38 @@ class SignupEmailTextfield extends StatelessWidget {
         controller: watchAuthCubit.emailController,
         keyboardtype: TextInputType.emailAddress,
         validator: (value) {
-          return null;
+          return AuthValidator.validateEmail(value!);
         },
         prefixicon: Icon(Icons.email_outlined, size: 25.sp),
         hintext: 'Email');
   }
 }
 
-class SignupFirstnameAndLastnameTextefield extends StatelessWidget {
-  const SignupFirstnameAndLastnameTextefield({super.key});
+class SignupFirstnameTextfield extends StatelessWidget {
+  const SignupFirstnameTextfield({super.key});
 
   @override
   Widget build(BuildContext context) {
     final watchAuthCubit = context.watch<AuthCubit>();
-    return Row(
-      children: [
-        AuthTextfield(
-            controller: watchAuthCubit.firstNameController,
-            validator: (value) {
-              return null;
-            },
-            prefixicon: Icon(
-              Icons.person_outline,
-              size: 25.sp,
-            ),
-            hintext: 'FirstName'),
-        AuthTextfield(
-            controller: watchAuthCubit.lastNameController,
-            validator: (value) {
-              return null;
-            },
-            prefixicon: Icon(Icons.person_outline, size: 25.sp),
-            hintext: 'LastName'),
-      ],
-    );
+    return AuthTextfield(
+        controller: watchAuthCubit.firstNameController,
+        prefixicon: Icon(Icons.person_outline, size: 25.sp),
+        hintext: 'FirstName');
+  }
+}
+
+class SignupLastnameTextfield extends StatelessWidget {
+  const SignupLastnameTextfield({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final watchAuthCubit = context.watch<AuthCubit>();
+    return AuthTextfield(
+        controller: watchAuthCubit.lastNameController,
+        validator: (value) {
+          return AuthValidator.validateName(value!);
+        },
+        prefixicon: Icon(Icons.person_outline, size: 25.sp),
+        hintext: 'LastName');
   }
 }

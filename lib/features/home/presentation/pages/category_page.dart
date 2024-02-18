@@ -1,4 +1,5 @@
 import 'package:craftman/constants/export.dart';
+import 'package:craftman/features/home/data/home_static_repo.dart';
 import 'package:flutter/material.dart';
 import '../widget/export.dart';
 
@@ -20,18 +21,20 @@ class Categories extends StatelessWidget {
             Expanded(
               child: Container(
                 padding: EdgeInsets.symmetric(
-                    horizontal: size.width * 0.04, vertical: size.width * 0.02),
+                    horizontal: size.width * 0.02, vertical: size.width * 0.02),
                 color: Appcolors.white,
                 width: size.width,
                 child: SizedBox(
                   height: size.height,
                   child: GridView.count(
-                    crossAxisSpacing: size.width * 0.02,
-                    mainAxisSpacing: size.width * 0.02,
-                    childAspectRatio: 1.0 / 1.2,
+                    crossAxisSpacing: size.width * 0.01,
+                    mainAxisSpacing: size.width * 0.01,
+                    childAspectRatio: 1.0 / 1.5,
                     crossAxisCount: 3,
                     children: List.generate(
-                        15, (index) => CategorieContainer(size: size)),
+                        HomeStaticRepo.services.length,
+                        (index) =>
+                            CategorieContainer(index: index, size: size)),
                   ),
                 ),
               ),

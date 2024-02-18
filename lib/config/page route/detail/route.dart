@@ -28,17 +28,32 @@ class AppRoute {
   static Route onGeneratedRoute(RouteSettings settings) {
     switch (settings.name) {
       case RouteName.splash:
-        return CustomPageRoute(child: const SplashScreen());
+        return CustomPageRoute(
+            direction: AxisDirection.left,
+            duration: 500,
+            child: const SplashScreen());
       case RouteName.firstonboarding:
-        return CustomPageRoute(child: const FirstOnboarding());
+        return CustomPageRoute(
+            direction: AxisDirection.left,
+            duration: 500,
+            child: const FirstOnboarding());
       case RouteName.secondonboarding:
-        return CustomPageRoute(child: const SecondOnboard());
+        return CustomPageRoute(
+            direction: AxisDirection.left,
+            duration: 500,
+            child: const SecondOnboard());
       case RouteName.thirdonboarding:
-        return CustomPageRoute(child: const ThirdOnboard());
+        return CustomPageRoute(
+            direction: AxisDirection.left,
+            duration: 500,
+            child: const ThirdOnboard());
       case RouteName.bottomNav:
         return CustomPageRoute(child: const BottomNav());
       case RouteName.fourthonboarding:
-        return CustomPageRoute(child: const Onboarding4());
+        return CustomPageRoute(
+            direction: AxisDirection.left,
+            duration: 500,
+            child: const Onboarding4());
       case RouteName.signup:
         return CustomPageRoute(child: const SignupPage());
       case RouteName.login:

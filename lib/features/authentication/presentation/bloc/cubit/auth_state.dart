@@ -13,7 +13,15 @@ final class AuthLoadingState extends AuthState {}
 
 final class AuthLoadedState extends AuthState {}
 
+final class AcctDeletedState extends AuthState {}
+
+final class AuthLogoutState extends AuthState {}
+
 final class AuthTokenVerifiedState extends AuthState {}
+
+final class AuthRegisterState extends AuthState {}
+
+final class AuthLoginState extends AuthState {}
 
 final class InvalidOtpState extends AuthState {
   final String msg;

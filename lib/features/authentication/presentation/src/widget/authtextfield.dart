@@ -46,15 +46,17 @@ class AuthTextfield extends StatelessWidget {
           prefixIcon: prefixicon,
           suffixIcon: suffixicon,
           hintText: hintext,
+          focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(size.width * 0.02),
+              borderSide: BorderSide(color: Appcolors.redColor)),
+          errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(size.width * 0.02),
+              borderSide: BorderSide(color: Appcolors.redColor)),
           focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(
-                size.width * 0.02,
-              ),
+              borderRadius: BorderRadius.circular(size.width * 0.02),
               borderSide: BorderSide(color: Appcolors.blue)),
           enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(
-                size.width * 0.02,
-              ),
+              borderRadius: BorderRadius.circular(size.width * 0.02),
               borderSide: BorderSide(color: Appcolors.lightgrey))),
     );
   }

@@ -24,8 +24,7 @@ class HomePage extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(height: size.height * 0.01),
-                HomeSearchField(size: size),
-                HomeCategoriesAndPopularService(size: size),
+                HomeCategoriesAndPopularService(size: size)
               ],
             ),
           ))

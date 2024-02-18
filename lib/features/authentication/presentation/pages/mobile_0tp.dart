@@ -19,10 +19,14 @@ class MobileOtp extends StatelessWidget {
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is AuthTokenVerifiedState) {
+          context.read<AuthCubit>().register();
+        }
+        if (state is AuthRegisterState) {
           Navigator.pushNamed(context, RouteName.emailotp);
         }
       },
       child: AppScaffold(
+        isloading: watchAuthCubit.state is AuthLoadingState,
         color: Appcolors.blue,
         body: Column(children: [
           Expanded(
@@ -58,11 +62,14 @@ class MobileOtp extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      AppText(
-                          fontweight: FontWeight.w700,
-                          size: 14,
-                          text: 'Resend',
-                          color: Appcolors.blue),
+                      GestureDetector(
+                          onTap: () =>
+                              context.read<AuthCubit>().firebaseSendToken(),
+                          child: AppText(
+                              fontweight: FontWeight.w700,
+                              size: 14,
+                              text: 'Resend',
+                              color: Appcolors.blue)),
                       AppText(
                           size: 14,
                           text: 'Expires In 00:23',
@@ -75,7 +82,9 @@ class MobileOtp extends StatelessWidget {
                       width: size.width,
                       height: size.width * 0.13,
                       radius: size.width * 0.03,
-                      ontap: () {},
+                      ontap: () {
+                        context.read<AuthCubit>().firebaseTokenVerified();
+                      },
                       child: AppText(
                           text: 'Proceed',
                           color: Appcolors.white,

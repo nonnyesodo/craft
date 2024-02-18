@@ -1,5 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:craftman/constants/util/useful_methods.dart';
+import 'package:craftman/features/authentication/presentation/bloc/cubit/auth_cubit.dart';
+import 'package:craftman/features/home/data/home_static_repo.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../config/page route/page_route.dart';
 import '../../../../../constants/export.dart';
@@ -22,7 +26,8 @@ class HomeAppbar extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AppText(
-                  text: 'Welome Nonny',
+                  text:
+                      '${Utils.getGreting()}, ${context.watch<AuthCubit>().user.firstName}',
                   color: Appcolors.white,
                   fontweight: FontWeight.w700),
               AppText(
@@ -71,8 +76,8 @@ class HomeCategoriesAndPopularService extends StatelessWidget {
           height: size.height * 0.2,
           child: ListView(
             scrollDirection: Axis.horizontal,
-            children:
-                List.generate(6, (index) => CategorieContainer(size: size)),
+            children: List.generate(
+                6, (index) => CategorieContainer(index: index, size: size)),
           ),
         ),
         SizedBox(height: size.height * 0.025),
@@ -153,9 +158,11 @@ class HomeSearchField extends StatelessWidget {
 }
 
 class CategorieContainer extends StatelessWidget {
-  const CategorieContainer({super.key, required this.size});
+  const CategorieContainer(
+      {super.key, required this.size, required this.index});
 
   final Size size;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -172,8 +179,10 @@ class CategorieContainer extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.format_paint, color: Appcolors.orange, size: 50.sp),
+            SizedBox(height: size.height * 0.01),
             AppText(
-              text: 'Painting',
+              textalign: TextAlign.center,
+              text: '${HomeStaticRepo.services[index].service}',
               color: Appcolors.blue,
               size: 16,
               fontweight: FontWeight.w500,

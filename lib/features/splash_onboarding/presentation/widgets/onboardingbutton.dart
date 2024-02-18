@@ -1,32 +1,26 @@
 import 'package:craftman/constants/appcolors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OnboardButton extends StatelessWidget {
-  const OnboardButton(
-      {super.key,
-      this.child,
-      required this.width,
-      required this.height,
-      required this.radius,
-      required this.ontap,
-      this.buttoncolor});
-  final Widget? child;
-  final double width, height, radius;
+  const OnboardButton({super.key, required this.ontap});
+
   final VoidCallback ontap;
-  final Color? buttoncolor;
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: ontap,
-      child: Container(
-        width: width,
-        height: height,
-        decoration: BoxDecoration(
-            color: buttoncolor ?? Appcolors.orange,
-            borderRadius: BorderRadius.circular(radius)),
-        child: Center(child: child),
-      ),
-    );
+    final size = MediaQuery.sizeOf(context);
+    return Center(
+        child: InkWell(
+            onTap: ontap,
+            child: Container(
+                width: size.width * 0.13,
+                height: size.width * 0.13,
+                decoration: BoxDecoration(
+                    color: Appcolors.orange,
+                    borderRadius: BorderRadius.circular(size.width * 0.03)),
+                child: Center(
+                    child: Icon(Icons.arrow_forward_ios,
+                        size: 25.sp, color: Appcolors.white)))));
   }
 }

@@ -1,15 +1,22 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:craftman/constants/appcolors.dart';
+import 'package:craftman/features/authentication/data/model/user_model.dart';
+import 'package:craftman/features/authentication/data/remote/auth_repo.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 part 'auth_state.dart';
 
-class AuthCubit extends Cubit<AuthState> {
-  AuthCubit() : super(AuthInitial());
+String bearerToken = ' ';
 
+class AuthCubit extends Cubit<AuthState> {
+  AuthRepo authRepo;
+  AuthCubit(this.authRepo) : super(AuthInitial());
+  UserModel user = UserModel();
   bool showPassword = true;
   bool agreetoterms = false;
   String? verificationCode = '';
@@ -20,10 +27,10 @@ class AuthCubit extends Cubit<AuthState> {
   final emailController = TextEditingController();
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
-
   final phoneController = TextEditingController();
   final passwordController = TextEditingController();
   final otpController = TextEditingController();
+
   firebaseSendToken() async {
     if (phoneController.text.isNotEmpty) {
       emit(AuthLoadingState());
@@ -111,5 +118,90 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthLoadingState());
     agreetoterms = !agreetoterms;
     emit(AuthLoadedState());
+  }
+
+  login() async {
+    emit(AuthLoadingState());
+    log('here');
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> loginInfo = prefs.getStringList("login") ?? [];
+    if (loginInfo.isNotEmpty) {
+      emailController.text = loginInfo.first;
+      passwordController.text = loginInfo.last;
+    }
+    try {
+      final response = await authRepo.login(
+          email: emailController.text, password: passwordController.text);
+      final body = jsonDecode(response.body);
+      log(body.toString());
+      if (response.statusCode == 200) {
+        user = UserModel.fromJson(body['data']);
+        bearerToken = user.bearerToken!;
+        if (stayLogin) {
+          prefs.setStringList(
+              "login", [emailController.text, passwordController.text]);
+        }
+
+        emit(AuthLoginState());
+      } else {
+        Fluttertoast.showToast(msg: body['message']);
+        emit(const AuthErrorState(error: 'error'));
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+    emit(AuthLoadedState());
+  }
+
+  register() async {
+    emit(AuthLoadingState());
+    try {
+      final response = await authRepo.register(
+          email: emailController.text,
+          password: passwordController.text,
+          mobile: phoneController.text,
+          name: '${firstNameController.text} ${lastNameController.text}');
+      final body = jsonDecode(response.body);
+      log(body.toString());
+      log(response.statusCode.toString());
+      if (response.statusCode == 201) {
+        emit(AuthRegisterState());
+      } else {
+        Fluttertoast.showToast(msg: body['message']);
+        emit(const AuthErrorState(error: 'error'));
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+    emit(AuthLoadedState());
+  }
+
+  deleteUser() async {
+    emit(AuthLoadingState());
+    try {
+      final response = await authRepo.deleteAccount();
+      final body = jsonDecode(response.body);
+      log(body.toString());
+      log(response.statusCode.toString());
+      if (response.statusCode == 200) {
+        log(body.toString());
+        emit(AuthLoadedState());
+      } else {
+        emit(const AuthErrorState(error: 'error'));
+        Fluttertoast.showToast(msg: body['message']);
+      }
+    } catch (e) {
+      log(e.toString());
+      emit(const AuthErrorState(error: 'error'));
+    }
+  }
+
+  logout() async {
+    emit(AuthLoadingState());
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('login');
+    user = UserModel();
+
+    emit(AuthLogoutState());
   }
 }

@@ -17,6 +17,7 @@ class EmailOtp extends StatelessWidget {
     final size = MediaQuery.sizeOf(context);
     final watchAuthCubit = context.watch<AuthCubit>();
     return AppScaffold(
+      isloading: watchAuthCubit.state is AuthLoadingState,
       color: Appcolors.blue,
       body: Column(children: [
         Expanded(
@@ -47,7 +48,7 @@ class EmailOtp extends StatelessWidget {
                     size: 16,
                     color: Appcolors.blue),
                 SizedBox(height: size.height * 0.04),
-                CustomOtpField(),
+                CustomOtpField(controller: watchAuthCubit.otpController),
                 SizedBox(height: size.height * 0.035),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
