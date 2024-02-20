@@ -23,6 +23,10 @@ final class AuthRegisterState extends AuthState {}
 
 final class AuthLoginState extends AuthState {}
 
+final class AuthEmailVerifiedState extends AuthState {}
+
+final class AuthEmailOtpSentState extends AuthState {}
+
 final class InvalidOtpState extends AuthState {
   final String msg;
   const InvalidOtpState({required this.msg});

@@ -8,5 +8,7 @@ abstract class AuthRepoInterface {
       required String name});
   Future<Response> login({required String email, required String password});
 
+  Future<Response> resendEmailOtp();
+  Future<Response> verifyEmail({required String code});
   Future<Response> deleteAccount();
 }

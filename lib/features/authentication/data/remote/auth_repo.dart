@@ -46,4 +46,23 @@ class AuthRepo implements AuthRepoInterface {
         await client.delete(url, headers: ApiHeaders.aunthenticatedHeader);
     return response;
   }
+
+  @override
+  Future<Response> verifyEmail({required String code}) async {
+    var url = Uri.parse(Apis.verifyEmail);
+    var body = {'code': code};
+    log('${ApiHeaders.aunthenticatedHeader.values}');
+    var response = await client.post(url,
+        body: jsonEncode(body), headers: ApiHeaders.aunthenticatedHeader);
+    return response;
+  }
+
+  @override
+  Future<Response> resendEmailOtp() async {
+    var url = Uri.parse(Apis.resendEmailOtp);
+    log('${ApiHeaders.aunthenticatedHeader.values}');
+    var response =
+        await client.post(url, headers: ApiHeaders.aunthenticatedHeader);
+    return response;
+  }
 }

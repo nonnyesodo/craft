@@ -29,13 +29,11 @@ class AuthValidator {
     }
   }
 
-  static String? validateName(String value) {
-    if (value.isEmpty) {
-      return 'Please enter name';
-    } else if (value.length < 3) {
+  static String validateName(String value) {
+    if (value.length < 3) {
       return 'Min name length 3';
     } else {
-      return null;
+      return 'valid';
     }
   }
 

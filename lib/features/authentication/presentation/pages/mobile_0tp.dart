@@ -1,4 +1,5 @@
 import 'package:craftman/config/page%20route/detail/route_name.dart';
+import 'package:craftman/constants/craftman_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -50,7 +51,7 @@ class MobileOtp extends StatelessWidget {
                       size: 16,
                       color: Appcolors.blue,
                       text:
-                          'we have sent an SMS with 6digit Code to ${watchAuthCubit.countrycode} ${watchAuthCubit.phoneController.text}'),
+                          'we have sent an SMS with 6digit Code to ${watchAuthCubit.countrycode} ${watchAuthCubit.phoneController.text.replaceFirst(RegExp(r'^0+'), "")}'),
                   SizedBox(height: size.height * 0.02),
                   AppText(
                       text: 'Enter code to procced ',
@@ -70,10 +71,16 @@ class MobileOtp extends StatelessWidget {
                               size: 14,
                               text: 'Resend',
                               color: Appcolors.blue)),
-                      AppText(
-                          size: 14,
-                          text: 'Expires In 00:23',
-                          color: Appcolors.orange)
+                      Row(
+                        children: [
+                          AppText(
+                              size: 14,
+                              text: 'Expires In  ',
+                              color: Appcolors.orange),
+                          CraftmanTimer(
+                              duration: 2, timerColor: Appcolors.orange)
+                        ],
+                      )
                     ],
                   ),
                   SizedBox(height: size.height * 0.08),

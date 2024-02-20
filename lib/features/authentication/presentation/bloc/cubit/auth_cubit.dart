@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:craftman/constants/appcolors.dart';
+import 'package:craftman/features/authentication/data/local/auth_validator.dart';
 import 'package:craftman/features/authentication/data/model/user_model.dart';
 import 'package:craftman/features/authentication/data/remote/auth_repo.dart';
 import 'package:equatable/equatable.dart';
@@ -11,7 +12,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 part 'auth_state.dart';
 
-String bearerToken = ' ';
+String bearerToken = '';
 
 class AuthCubit extends Cubit<AuthState> {
   AuthRepo authRepo;
@@ -34,20 +35,16 @@ class AuthCubit extends Cubit<AuthState> {
   firebaseSendToken() async {
     if (phoneController.text.isNotEmpty) {
       emit(AuthLoadingState());
-      var mobile = phoneController.text.replaceFirst(RegExp(r'^0+'), "");
       await FirebaseAuth.instance.verifyPhoneNumber(
-          phoneNumber: "$countrycode$mobile",
+          phoneNumber:
+              "$countrycode${phoneController.text.replaceFirst(RegExp(r'^0+'), "")}",
           verificationCompleted: (PhoneAuthCredential credential) async {
             emit(AuthTokenVerifiedState());
           },
           verificationFailed: (FirebaseAuthException e) {
             emit(InvalidOtpState(msg: e.message!));
             log(e.message.toString());
-            Fluttertoast.showToast(
-              msg: "${e.message}",
-              backgroundColor: Appcolors.blackColor,
-              textColor: Appcolors.white,
-            );
+            Fluttertoast.showToast(msg: "${e.message}");
           },
           codeSent: (String? verificationID, int? resendToken) {
             verificationCode = verificationID;
@@ -60,12 +57,8 @@ class AuthCubit extends Cubit<AuthState> {
           forceResendingToken: resendtoken,
           timeout: const Duration(seconds: 120));
     } else {
-      // Fluttertoast.showToast(
-      //   msg:
-      //       AuthTextfieldValidator.mobileValidtor(value: mobileController.text),
-      //   backgroundColor: AppColors.bgColor,
-      //   textColor: AppColors.blackColor,
-      // );
+      Fluttertoast.showToast(
+          msg: AuthValidator.validateMobile(phoneController.text)!);
     }
   }
 
@@ -111,6 +104,18 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthLoadingState());
     stayLogin = !stayLogin;
     log(stayLogin.toString());
+    emit(AuthLoadedState());
+  }
+
+  updateState() {
+    emit(AuthLoadingState());
+    emit(AuthLoadedState());
+  }
+
+  String field = '';
+  enableInputFields(String value) {
+    emit(AuthLoadingState());
+    field = value;
     emit(AuthLoadedState());
   }
 
@@ -164,7 +169,9 @@ class AuthCubit extends Cubit<AuthState> {
       final body = jsonDecode(response.body);
       log(body.toString());
       log(response.statusCode.toString());
-      if (response.statusCode == 201) {
+      if (response.statusCode == 200) {
+        user = UserModel.fromJson(body['data']);
+        bearerToken = user.bearerToken!;
         emit(AuthRegisterState());
       } else {
         Fluttertoast.showToast(msg: body['message']);
@@ -172,8 +179,8 @@ class AuthCubit extends Cubit<AuthState> {
       }
     } catch (e) {
       log(e.toString());
+      emit(const AuthErrorState(error: 'error'));
     }
-    emit(AuthLoadedState());
   }
 
   deleteUser() async {
@@ -186,6 +193,45 @@ class AuthCubit extends Cubit<AuthState> {
       if (response.statusCode == 200) {
         log(body.toString());
         emit(AuthLoadedState());
+      } else {
+        emit(const AuthErrorState(error: 'error'));
+        Fluttertoast.showToast(msg: body['message']);
+      }
+    } catch (e) {
+      log(e.toString());
+      emit(const AuthErrorState(error: 'error'));
+    }
+  }
+
+  verifyEmail() async {
+    emit(AuthLoadingState());
+    try {
+      final response = await authRepo.verifyEmail(code: otpController.text);
+      final body = jsonDecode(response.body);
+      log(response.statusCode.toString());
+      if (response.statusCode == 200) {
+        log(body.toString());
+        emit(AuthEmailVerifiedState());
+      } else {
+        emit(const AuthErrorState(error: 'error'));
+        Fluttertoast.showToast(msg: body['message']);
+      }
+    } catch (e) {
+      log(e.toString());
+      emit(const AuthErrorState(error: 'error'));
+    }
+  }
+
+  resendEmailOtp() async {
+    emit(AuthLoadingState());
+    try {
+      final response = await authRepo.resendEmailOtp();
+      final body = jsonDecode(response.body);
+      log(response.statusCode.toString());
+      if (response.statusCode == 200) {
+        log(body.toString());
+        emit(AuthEmailOtpSentState());
+        Fluttertoast.showToast(msg: body['message']);
       } else {
         emit(const AuthErrorState(error: 'error'));
         Fluttertoast.showToast(msg: body['message']);
