@@ -2,6 +2,7 @@ import 'package:craftman/config/page%20route/detail/route_name.dart';
 import 'package:craftman/constants/craftman_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import '../../../../constants/appcolors.dart';
 import '../../../../constants/appscaffold.dart';
@@ -17,6 +18,8 @@ class MobileOtp extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
     final watchAuthCubit = context.watch<AuthCubit>();
+
+    final readAuthCubit = context.read<AuthCubit>();
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is AuthTokenVerifiedState) {
@@ -64,22 +67,32 @@ class MobileOtp extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       GestureDetector(
-                          onTap: () =>
-                              context.read<AuthCubit>().firebaseSendToken(),
+                          onTap: watchAuthCubit.showTimer
+                              ? () => Fluttertoast.showToast(
+                                  msg: 'Please wait for timer')
+                              : () {
+                                  readAuthCubit.changeShowTimer();
+                                  readAuthCubit.firebaseSendToken();
+                                },
                           child: AppText(
                               fontweight: FontWeight.w700,
                               size: 14,
                               text: 'Resend',
                               color: Appcolors.blue)),
-                      Row(
-                        children: [
-                          AppText(
-                              size: 14,
-                              text: 'Expires In  ',
-                              color: Appcolors.orange),
-                          CraftmanTimer(
-                              duration: 2, timerColor: Appcolors.orange)
-                        ],
+                      Visibility(
+                        visible: watchAuthCubit.showTimer,
+                        child: Row(
+                          children: [
+                            AppText(
+                                size: 14,
+                                text: 'Expires In  ',
+                                color: Appcolors.orange),
+                            CraftmanTimer(
+                                onEnd: () => readAuthCubit.changeShowTimer(),
+                                duration: 2,
+                                timerColor: Appcolors.orange)
+                          ],
+                        ),
                       )
                     ],
                   ),
@@ -117,6 +130,7 @@ class CustomOtpField extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
     return PinCodeTextField(
+        keyboardType: TextInputType.number,
         controller: controller,
         pinTheme: PinTheme(
             activeColor: Appcolors.orange,

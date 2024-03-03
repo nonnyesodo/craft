@@ -81,16 +81,10 @@ class HomeCategoriesAndPopularService extends StatelessWidget {
           ),
         ),
         SizedBox(height: size.height * 0.025),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            AppText(
-                text: 'Popular Services',
-                fontweight: FontWeight.w800,
-                color: Appcolors.blue),
-            AppText(text: 'View All', size: 16, color: Appcolors.orange),
-          ],
-        ),
+        AppText(
+            text: 'Popular Services',
+            fontweight: FontWeight.w800,
+            color: Appcolors.blue),
         SizedBox(height: size.height * 0.01),
         SizedBox(
           height: size.height * 0.3,
@@ -112,27 +106,23 @@ class HomeCategoriesAndPopularService extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            width: size.width,
-                            height: size.width * 0.4,
-                            decoration: BoxDecoration(
-                                color: Appcolors.blue,
-                                image: const DecorationImage(
-                                    fit: BoxFit.contain,
-                                    image: AssetImage(OnboardingImages.splash)),
-                                borderRadius:
-                                    BorderRadius.circular(size.width * 0.03)),
-                          ),
+                              width: size.width,
+                              height: size.width * 0.4,
+                              decoration: BoxDecoration(
+                                  color: Appcolors.blue,
+                                  image: const DecorationImage(
+                                      fit: BoxFit.contain,
+                                      image:
+                                          AssetImage(OnboardingImages.splash)),
+                                  borderRadius: BorderRadius.circular(
+                                      size.width * 0.03))),
                           AppText(
-                            text: 'WallPainting',
-                            color: Appcolors.blue,
-                            size: 16,
-                            fontweight: FontWeight.w900,
-                          ),
+                              text: 'WallPainting',
+                              color: Appcolors.blue,
+                              size: 16,
+                              fontweight: FontWeight.w900),
                           AppText(
-                            text: 'Painter',
-                            color: Appcolors.blue,
-                            size: 16,
-                          )
+                              text: 'Painter', color: Appcolors.blue, size: 16)
                         ],
                       ),
                     )),
@@ -180,12 +170,14 @@ class CategorieContainer extends StatelessWidget {
           children: [
             Icon(Icons.format_paint, color: Appcolors.orange, size: 50.sp),
             SizedBox(height: size.height * 0.01),
-            AppText(
-              textalign: TextAlign.center,
-              text: '${HomeStaticRepo.services[index].service}',
-              color: Appcolors.blue,
-              size: 16,
-              fontweight: FontWeight.w500,
+            SizedBox(
+              height: size.height * 0.042,
+              child: AppText(
+                  textalign: TextAlign.center,
+                  text: '${HomeStaticRepo.services[index].service}',
+                  color: Appcolors.blue,
+                  size: 14,
+                  fontweight: FontWeight.w500),
             )
           ],
         ),

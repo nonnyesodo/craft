@@ -28,7 +28,8 @@ class SignupButton extends StatelessWidget {
                   watchAuthCubit.firstNameController.text.length >= 3 &&
                   watchAuthCubit.lastNameController.text.length >= 3
               ? context.read<AuthCubit>().firebaseSendToken()
-              : Fluttertoast.showToast(msg: 'Please Validate Form');
+              : Fluttertoast.showToast(
+                  msg: 'Please Validate Form & agree to terms');
         },
         child: AppText(
             text: 'Signup',

@@ -3,6 +3,7 @@ import 'package:craftman/features/authentication/presentation/pages/login_page.d
 import 'package:craftman/features/authentication/presentation/pages/mobile_0tp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import '../../../../constants/appcolors.dart';
 import '../../../../constants/appscaffold.dart';
 import '../../../../constants/apptext.dart';
@@ -18,6 +19,7 @@ class EmailOtp extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
     final watchAuthCubit = context.watch<AuthCubit>();
+    final readAuthCubit = context.read<AuthCubit>();
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is AuthEmailVerifiedState) {
@@ -67,38 +69,44 @@ class EmailOtp extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         GestureDetector(
-                            onTap: () =>
-                                context.read<AuthCubit>().resendEmailOtp(),
+                            onTap: watchAuthCubit.showTimer
+                                ? () => Fluttertoast.showToast(
+                                    msg: 'Please wait timer')
+                                : () {
+                                    readAuthCubit.changeShowTimer();
+                                    readAuthCubit.resendEmailOtp();
+                                  },
                             child: AppText(
                                 fontweight: FontWeight.w700,
                                 size: 14,
                                 text: 'Resend',
                                 color: Appcolors.blue)),
-                        Row(
-                          children: [
+                        Visibility(
+                          visible: watchAuthCubit.showTimer,
+                          child: Row(children: [
                             AppText(
                                 size: 14,
                                 text: 'Expires in  ',
                                 color: Appcolors.orange),
                             CraftmanTimer(
-                                duration: 15, timerColor: Appcolors.orange)
-                          ],
+                                onEnd: () => readAuthCubit.changeShowTimer(),
+                                duration: 15,
+                                timerColor: Appcolors.orange)
+                          ]),
                         )
                       ]),
                   SizedBox(height: size.height * 0.08),
                   AuthButton(
-                    isloading: watchAuthCubit.state is AuthLoadingState,
-                    width: size.width,
-                    height: size.width * 0.13,
-                    radius: size.width * 0.03,
-                    ontap: () => context.read<AuthCubit>().verifyEmail(),
-                    child: AppText(
-                      text: 'Proceed',
-                      color: Appcolors.white,
-                      fontweight: FontWeight.w700,
-                      size: 20,
-                    ),
-                  ),
+                      isloading: watchAuthCubit.state is AuthLoadingState,
+                      width: size.width,
+                      height: size.width * 0.13,
+                      radius: size.width * 0.03,
+                      ontap: () => readAuthCubit.verifyEmail(),
+                      child: AppText(
+                          text: 'Proceed',
+                          color: Appcolors.white,
+                          size: 20,
+                          fontweight: FontWeight.w700)),
                   SizedBox(height: size.height * 0.04),
                   Image.asset(OnboardingImages.splash,
                       fit: BoxFit.contain,

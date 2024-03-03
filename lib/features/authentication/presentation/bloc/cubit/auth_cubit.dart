@@ -31,6 +31,7 @@ class AuthCubit extends Cubit<AuthState> {
   final phoneController = TextEditingController();
   final passwordController = TextEditingController();
   final otpController = TextEditingController();
+  final addressController = TextEditingController();
 
   firebaseSendToken() async {
     if (phoneController.text.isNotEmpty) {
@@ -107,6 +108,13 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthLoadedState());
   }
 
+  bool showTimer = true;
+  changeShowTimer() {
+    emit(AuthLoadingState());
+    showTimer = !showTimer;
+    emit(AuthLoadedState());
+  }
+
   updateState() {
     emit(AuthLoadingState());
     emit(AuthLoadedState());
@@ -146,7 +154,6 @@ class AuthCubit extends Cubit<AuthState> {
           prefs.setStringList(
               "login", [emailController.text, passwordController.text]);
         }
-
         emit(AuthLoginState());
       } else {
         Fluttertoast.showToast(msg: body['message']);
@@ -154,8 +161,8 @@ class AuthCubit extends Cubit<AuthState> {
       }
     } catch (e) {
       log(e.toString());
+      emit(const AuthErrorState(error: 'error'));
     }
-    emit(AuthLoadedState());
   }
 
   register() async {
@@ -246,8 +253,16 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthLoadingState());
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove('login');
-    user = UserModel();
-
     emit(AuthLogoutState());
+    user = UserModel();
+  }
+
+  getUserInfo() async {
+    emit(AuthLoadingState());
+    firstNameController.text = user.firstName! + user.lastname!;
+    phoneController.text = user.mobileNumber!;
+    emailController.text = user.email!;
+    // addressController = user.
+    emit(AuthLoadedState());
   }
 }

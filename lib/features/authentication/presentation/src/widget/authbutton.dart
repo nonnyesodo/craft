@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../../../../constants/appcolors.dart';
 
 class AuthButton extends StatelessWidget {
@@ -29,7 +31,9 @@ class AuthButton extends StatelessWidget {
                 borderRadius:
                     BorderRadius.circular(radius ?? size.width * 0.02)),
             child: isloading
-                ? const Center(child: CircularProgressIndicator.adaptive())
+                ? Center(
+                    child: LoadingAnimationWidget.inkDrop(
+                        color: Appcolors.blue, size: 23.sp))
                 : Center(child: child)));
   }
 }

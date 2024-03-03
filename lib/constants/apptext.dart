@@ -20,13 +20,11 @@ class AppText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      textAlign: textalign,
-      softWrap: true,
-      maxLines: maxline,
-      style: GoogleFonts.poppins(
-          fontSize: size.sp, fontWeight: fontweight, color: color),
-    );
+    return Text(text,
+        textAlign: textalign,
+        softWrap: true,
+        maxLines: maxline,
+        style: GoogleFonts.roboto(
+            fontSize: size.sp, fontWeight: fontweight, color: color));
   }
 }

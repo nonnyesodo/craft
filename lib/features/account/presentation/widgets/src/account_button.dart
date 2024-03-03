@@ -1,5 +1,7 @@
 import 'package:craftman/constants/appcolors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class AccountButton extends StatelessWidget {
   const AccountButton(
@@ -20,7 +22,7 @@ class AccountButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
-    return InkWell(
+    return GestureDetector(
         onTap: ontap,
         child: Container(
             alignment: Alignment.center,
@@ -31,7 +33,8 @@ class AccountButton extends StatelessWidget {
                 borderRadius:
                     BorderRadius.circular(radius ?? size.width * 0.03)),
             child: isloading
-                ? const CircularProgressIndicator.adaptive()
+                ? LoadingAnimationWidget.inkDrop(
+                    color: Appcolors.blue, size: 23.sp)
                 : child));
   }
 }

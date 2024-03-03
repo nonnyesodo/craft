@@ -4,12 +4,14 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:craftman/config/page%20route/detail/route_name.dart';
 import 'package:craftman/constants/appcolors.dart';
 import 'package:craftman/constants/appscaffold.dart';
+import 'package:craftman/constants/apptext.dart';
 import 'package:craftman/features/authentication/presentation/bloc/cubit/auth_cubit.dart';
 import 'package:craftman/features/splash_onboarding/data/local/onboarding_images.dart';
 import 'package:craftman/features/splash_onboarding/presentation/bloc/cubit/onboarding_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -41,17 +43,14 @@ class _SplashScreenState extends State<SplashScreen> {
         BlocListener<OnboardingCubit, OnboardingState>(
             listener: (context, state) {
           if (state is OnboardingLoadedState) {
-            log('mesge');
             Navigator.pushNamedAndRemoveUntil(
                 context, RouteName.login, (route) => false);
           }
           if (state is Newuserstate) {
-            log('message');
             Navigator.pushNamedAndRemoveUntil(
                 context, RouteName.firstonboarding, (route) => false);
           }
           if (state is AutoLoginState) {
-            log('mess');
             context.read<AuthCubit>().login();
           }
         }),
@@ -84,9 +83,17 @@ class _SplashScreenState extends State<SplashScreen> {
                   ],
                   isRepeatingAnimation: true),
               context.watch<AuthCubit>().state is AuthLoadingState
-                  ? Center(
-                      child: CircularProgressIndicator.adaptive(
-                          valueColor: AlwaysStoppedAnimation(Appcolors.white)))
+                  ? Column(
+                      children: [
+                        LoadingAnimationWidget.inkDrop(
+                            color: Appcolors.white, size: 25.sp),
+                        SizedBox(height: size.height * 0.013),
+                        AppText(
+                            text: 'Please wait ..',
+                            color: Appcolors.white,
+                            size: 16)
+                      ],
+                    )
                   : const SizedBox.shrink()
             ],
           )),

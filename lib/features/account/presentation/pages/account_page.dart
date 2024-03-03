@@ -63,6 +63,7 @@ class AccountPage extends StatelessWidget {
                             title: 'Account Details',
                             prefixIcon: Icons.account_circle,
                             onTap: () {
+                              context.read<AuthCubit>().getUserInfo();
                               Navigator.pushNamed(
                                   context, RouteName.accountdetail);
                             }),

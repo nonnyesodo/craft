@@ -5,7 +5,7 @@ class AuthValidator {
     if (value.isEmpty) {
       return 'Please enter password';
     } else if (value.length < 6) {
-      return 'Password must be upto 6';
+      return 'Password must be more than 6';
     } else {
       if (!regex.hasMatch(value)) {
         return 'Password must contain uppercase , Special character and digit';
