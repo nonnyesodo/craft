@@ -147,6 +147,10 @@ class AuthCubit extends Cubit<AuthState> {
           email: emailController.text, password: passwordController.text);
       final body = jsonDecode(response.body);
       log(body.toString());
+      log(response.statusCode.toString());
+      if (response.statusCode == 400) {
+        prefs.remove('login');
+      }
       if (response.statusCode == 200) {
         user = UserModel.fromJson(body['data']);
         bearerToken = user.bearerToken!;

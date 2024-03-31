@@ -76,7 +76,7 @@ class AppRoute {
         return CustomPageRoute(child: const Categories());
       case RouteName.accountdetail:
         return CustomPageRoute(child: const AccountDetails());
-      case RouteName.bookingDeatail:
+      case RouteName.bookingDetail:
         return CustomPageRoute(child: const BookingDetail());
       case RouteName.serviceProviderform:
         return CustomPageRoute(child: const ServiceProviderForm());

@@ -2,14 +2,14 @@ import 'package:craftman/constants/export.dart';
 import 'package:flutter/material.dart';
 
 class HomeTextfield extends StatelessWidget {
-  const HomeTextfield({
-    super.key,
-    required this.size,
-    this.prefixicon,
-    this.hintext,
-    this.controller,
-  });
-
+  const HomeTextfield(
+      {super.key,
+      required this.size,
+      this.prefixicon,
+      this.hintext,
+      this.controller,
+      this.onChange});
+  final Function(String)? onChange;
   final Size size;
   final Widget? prefixicon;
   final String? hintext;
@@ -17,6 +17,7 @@ class HomeTextfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+        onChanged: onChange,
         controller: controller,
         decoration: InputDecoration(
             prefixIcon: prefixicon,

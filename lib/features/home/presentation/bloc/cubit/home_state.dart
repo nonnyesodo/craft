@@ -13,6 +13,12 @@ final class HomeLoading extends HomeState {}
 
 final class HomeLoaded extends HomeState {}
 
+final class Searched extends HomeState {}
+
+final class FetchedArtisan extends HomeState {}
+
+final class BookedArtisan extends HomeState {}
+
 final class HomeerrorState extends HomeState {
   final String error;
 

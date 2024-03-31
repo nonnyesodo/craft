@@ -1,7 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:craftman/constants/util/c_icon.dart';
 import 'package:craftman/constants/util/useful_methods.dart';
 import 'package:craftman/features/authentication/presentation/bloc/cubit/auth_cubit.dart';
-import 'package:craftman/features/home/data/home_static_repo.dart';
+import 'package:craftman/features/home/data/local/home_static_repo.dart';
+import 'package:craftman/features/home/presentation/bloc/cubit/home_cubit.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -50,49 +53,40 @@ class HomeCategoriesAndPopularService extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final catgory = context.watch<HomeCubit>().homeCategory;
     return Expanded(
-        child: ListView(
-      children: [
-        SizedBox(height: size.height * 0.01),
-        HomeCarousel(size: size),
-        SizedBox(height: size.height * 0.01),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            AppText(
-                text: 'Categories',
-                fontweight: FontWeight.w800,
-                color: Appcolors.blue),
-            GestureDetector(
-              onTap: () => Navigator.pushNamed(context, RouteName.categories),
-              child:
-                  AppText(text: 'View All', size: 16, color: Appcolors.orange),
-            ),
-          ],
-        ),
-
-        // SizedBox(height: size.height * 0.01),
-        SizedBox(
-          height: size.height * 0.2,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: List.generate(
-                6, (index) => CategorieContainer(index: index, size: size)),
-          ),
-        ),
-        SizedBox(height: size.height * 0.025),
+        child: ListView(children: [
+      SizedBox(height: size.height * 0.01),
+      HomeCarousel(size: size),
+      SizedBox(height: size.height * 0.01),
+      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         AppText(
-            text: 'Popular Services',
+            text: 'Categories',
             fontweight: FontWeight.w800,
             color: Appcolors.blue),
-        SizedBox(height: size.height * 0.01),
-        SizedBox(
+        GestureDetector(
+            onTap: () => Navigator.pushNamed(context, RouteName.categories),
+            child: AppText(text: 'View All', size: 16, color: Appcolors.orange))
+      ]),
+      SizedBox(
+          height: size.height * 0.2,
+          child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: List.generate(catgory.length,
+                  (index) => CategorieContainer(index: index, size: size)))),
+      SizedBox(height: size.height * 0.025),
+      AppText(
+          text: 'Popular Services',
+          fontweight: FontWeight.w800,
+          color: Appcolors.blue),
+      SizedBox(height: size.height * 0.01),
+      SizedBox(
           height: size.height * 0.3,
           child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: List.generate(
-                6,
-                (index) => AppshadowContainer(
+              scrollDirection: Axis.horizontal,
+              children: List.generate(
+                  6,
+                  (index) => AppshadowContainer(
                       padding: EdgeInsets.symmetric(
                           horizontal: size.width * 0.03,
                           vertical: size.width * 0.02),
@@ -103,33 +97,30 @@ class HomeCategoriesAndPopularService extends StatelessWidget {
                           top: size.width * 0.03),
                       width: size.width * 0.5,
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                              width: size.width,
-                              height: size.width * 0.4,
-                              decoration: BoxDecoration(
-                                  color: Appcolors.blue,
-                                  image: const DecorationImage(
-                                      fit: BoxFit.contain,
-                                      image:
-                                          AssetImage(OnboardingImages.splash)),
-                                  borderRadius: BorderRadius.circular(
-                                      size.width * 0.03))),
-                          AppText(
-                              text: 'WallPainting',
-                              color: Appcolors.blue,
-                              size: 16,
-                              fontweight: FontWeight.w900),
-                          AppText(
-                              text: 'Painter', color: Appcolors.blue, size: 16)
-                        ],
-                      ),
-                    )),
-          ),
-        ),
-      ],
-    ));
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                                width: size.width,
+                                height: size.width * 0.4,
+                                decoration: BoxDecoration(
+                                    color: Appcolors.blue,
+                                    image: const DecorationImage(
+                                        fit: BoxFit.contain,
+                                        image: AssetImage(
+                                            OnboardingImages.splash)),
+                                    borderRadius: BorderRadius.circular(
+                                        size.width * 0.03))),
+                            AppText(
+                                text: 'WallPainting',
+                                color: Appcolors.blue,
+                                size: 16,
+                                fontweight: FontWeight.w900),
+                            AppText(
+                                text: 'Painter',
+                                color: Appcolors.blue,
+                                size: 16)
+                          ])))))
+    ]));
   }
 }
 
@@ -141,6 +132,11 @@ class HomeSearchField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return HomeTextfield(
+        // onChange: (value) {
+        //   context
+        //       .read<HomeCubit>()
+        //       .searchCategories(value, HomeStaticRepo.services);
+        // },
         size: size,
         prefixicon: Icon(Icons.search, size: 25.sp),
         hintext: 'Search...');
@@ -156,32 +152,42 @@ class CategorieContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, RouteName.skilldetail),
-      child: AppshadowContainer(
-        shadowcolour: Appcolors.lightgrey.withOpacity(0.3),
-        margin: EdgeInsets.only(
-            right: size.width * 0.035,
-            bottom: size.width * 0.03,
-            top: size.width * 0.03),
-        width: size.width * 0.3,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.format_paint, color: Appcolors.orange, size: 50.sp),
-            SizedBox(height: size.height * 0.01),
-            SizedBox(
-              height: size.height * 0.042,
-              child: AppText(
-                  textalign: TextAlign.center,
-                  text: '${HomeStaticRepo.services[index].service}',
-                  color: Appcolors.blue,
-                  size: 14,
-                  fontweight: FontWeight.w500),
-            )
-          ],
-        ),
-      ),
+    final watchHome = context.watch<HomeCubit>();
+    return BlocBuilder<HomeCubit, HomeState>(
+      builder: (context, state) {
+        if (state is Searched) {}
+        return AppshadowContainer(
+            onTap: () {
+              context.read<HomeCubit>().getArtisans(
+                  id: watchHome.category[index].id!,
+                  category: watchHome.category[index].category!);
+              Navigator.pushNamed(context, RouteName.skilldetail);
+            },
+            shadowcolour: Appcolors.lightgrey.withOpacity(0.3),
+            margin: EdgeInsets.only(
+                right: size.width * 0.035,
+                bottom: size.width * 0.03,
+                top: size.width * 0.03),
+            padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
+            width: size.width * 0.3,
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Icon(
+                  HomeStaticRepo
+                      .servicesIcon[watchHome.category[index].category],
+                  color: HomeStaticRepo.servicesColor[index],
+                  size: 45.sp),
+              SizedBox(height: size.height * 0.01),
+              SizedBox(
+                  height: size.height * 0.042,
+                  child: AppText(
+                      textalign: TextAlign.center,
+                      text: '${watchHome.category[index].category}',
+                      color: Appcolors.blue,
+                      size: 14,
+                      fontweight: FontWeight.w500))
+            ]));
+      },
     );
   }
 }

@@ -6,6 +6,8 @@ import 'package:craftman/constants/appcolors.dart';
 import 'package:craftman/constants/appscaffold.dart';
 import 'package:craftman/constants/apptext.dart';
 import 'package:craftman/features/authentication/presentation/bloc/cubit/auth_cubit.dart';
+import 'package:craftman/features/booking/presentation/bloc/cubit/booking_cubit.dart';
+import 'package:craftman/features/home/presentation/bloc/cubit/home_cubit.dart';
 import 'package:craftman/features/splash_onboarding/data/local/onboarding_images.dart';
 import 'package:craftman/features/splash_onboarding/presentation/bloc/cubit/onboarding_cubit.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final readHome = context.read<HomeCubit>();
     final colorizeColors = [
       Appcolors.blue,
       Appcolors.orange,
@@ -56,6 +59,9 @@ class _SplashScreenState extends State<SplashScreen> {
         }),
         BlocListener<AuthCubit, AuthState>(listener: (context, state) {
           if (state is AuthLoginState) {
+            readHome.getCategories();
+            readHome.getNotification();
+            context.read<BookingCubit>().getbookingHistory();
             Navigator.pushNamedAndRemoveUntil(
                 context, RouteName.bottomNav, (route) => false);
           }

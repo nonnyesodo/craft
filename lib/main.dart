@@ -4,7 +4,9 @@ import 'package:craftman/features/account/data/remote/acct_repo.dart';
 import 'package:craftman/features/account/presentation/bloc/cubit/account_cubit.dart';
 import 'package:craftman/features/authentication/data/remote/auth_repo.dart';
 import 'package:craftman/features/authentication/presentation/bloc/cubit/auth_cubit.dart';
+import 'package:craftman/features/booking/data/remote/booking_repo.dart';
 import 'package:craftman/features/booking/presentation/bloc/cubit/booking_cubit.dart';
+import 'package:craftman/features/home/data/remote_repo/home_repo.dart';
 import 'package:craftman/features/home/presentation/bloc/cubit/home_cubit.dart';
 import 'package:craftman/features/splash_onboarding/presentation/bloc/cubit/onboarding_cubit.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -29,9 +31,9 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider(create: (context) => OnboardingCubit()),
           BlocProvider(create: (context) => AuthCubit(AuthRepo())),
-          BlocProvider(create: (context) => BookingCubit()),
+          BlocProvider(create: (context) => BookingCubit(BookingRepo())),
           BlocProvider(create: (context) => AccountCubit(AcctRepo())),
-          BlocProvider(create: (context) => HomeCubit())
+          BlocProvider(create: (context) => HomeCubit(HomeRepo()))
         ],
         child: ScreenUtilInit(
             minTextAdapt: true,

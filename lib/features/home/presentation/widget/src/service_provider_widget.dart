@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../config/page route/page_route.dart';
 import '../../../../../constants/export.dart';
 import '../../../../splash_onboarding/data/local/onboarding_images.dart';
+import '../../bloc/cubit/home_cubit.dart';
 import '../export.dart';
 
 class ImagesAndVideo extends StatelessWidget {
@@ -15,9 +17,8 @@ class ImagesAndVideo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: size.width * 0.04),
-      child: Column(
-        children: [
+        padding: EdgeInsets.symmetric(horizontal: size.width * 0.04),
+        child: Column(children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -34,25 +35,20 @@ class ImagesAndVideo extends StatelessWidget {
           ),
           SizedBox(height: size.height * 0.02),
           SizedBox(
-            height: size.height * 0.2,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: List.generate(
-                  4,
-                  (index) => AppshadowContainer(
-                        shadowcolour: Appcolors.lightgrey.withOpacity(0.25),
-                        margin: EdgeInsets.only(
-                            right: size.width * 0.04,
-                            bottom: size.width * 0.02,
-                            top: size.width * 0.02),
-                        width: size.width * 0.35,
-                        child: Image.asset(OnboardingImages.splash),
-                      )),
-            ),
-          ),
-        ],
-      ),
-    );
+              height: size.height * 0.2,
+              child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: List.generate(
+                      4,
+                      (index) => AppshadowContainer(
+                          shadowcolour: Appcolors.lightgrey.withOpacity(0.25),
+                          margin: EdgeInsets.only(
+                              right: size.width * 0.04,
+                              bottom: size.width * 0.02,
+                              top: size.width * 0.02),
+                          width: size.width * 0.35,
+                          child: Image.asset(OnboardingImages.splash)))))
+        ]));
   }
 }
 
@@ -63,6 +59,7 @@ class PersonalInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final selectedArtisan = context.watch<HomeCubit>().selectedArtisan;
     return Padding(
         padding: EdgeInsets.symmetric(horizontal: size.width * 0.04),
         child: Column(
@@ -73,11 +70,13 @@ class PersonalInformation extends StatelessWidget {
                 color: Appcolors.blue,
                 fontweight: FontWeight.w800),
             SizedBox(height: size.height * 0.01),
-            const ProviderInfo(
-                value: 'Okigwe Rd', prefixicon: Icons.location_pin),
+            ProviderInfo(
+                value: '${selectedArtisan.address}',
+                prefixicon: Icons.location_pin),
             SizedBox(height: size.height * 0.005),
-            const ProviderInfo(
-                value: '07030066075', prefixicon: Icons.phone_android),
+            ProviderInfo(
+                value: '${selectedArtisan.mobileNumber}',
+                prefixicon: Icons.phone_android),
           ],
         ));
   }
@@ -103,13 +102,14 @@ class CostAndDistanceValues extends StatelessWidget {
   }
 }
 
-class AboutMe extends StatelessWidget {
-  const AboutMe({super.key, required this.size});
+class AboutArtisan extends StatelessWidget {
+  const AboutArtisan({super.key, required this.size});
 
   final Size size;
 
   @override
   Widget build(BuildContext context) {
+    final selectedArtisan = context.watch<HomeCubit>().selectedArtisan;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: size.width * 0.04),
       child: Column(
@@ -123,8 +123,7 @@ class AboutMe extends StatelessWidget {
               maxline: 4,
               size: 13.5,
               color: Appcolors.blue.withOpacity(0.7),
-              text:
-                  'Painter with a passion for capturing the beauty of the world around me.My paintings are known for their vibrant colors and expressive brushstrokes'),
+              text: '${selectedArtisan.biography}'),
           SizedBox(height: size.height * 0.02),
         ],
       ),
@@ -139,14 +138,17 @@ class JobAndTaskInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final selectedArtisan = context.watch<HomeCubit>().selectedArtisan;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: size.width * 0.04),
       child: Row(
         children: [
           GestureDetector(
               onTap: () => Navigator.pushNamed(context, RouteName.reviews),
-              child: const WorkInfo(
-                  title: 'Ratings', subtitle: '4.5', icon: Icons.star)),
+              child: WorkInfo(
+                  title: 'Ratings',
+                  subtitle: '${selectedArtisan.avgRatinfg}',
+                  icon: Icons.star)),
           SizedBox(width: size.width * 0.2),
           WorkInfo(
               iconcolor: Appcolors.blue,
@@ -166,52 +168,45 @@ class ProfilePIc extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final selectedArtisan = context.watch<HomeCubit>().selectedArtisan;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: size.width * 0.04),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ProfilePic(
-              size: size,
-              height: size.width * 0.25,
-              radius: size.width * 0.2,
-              width: size.width * 0.25),
-          SizedBox(width: size.width * 0.04),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AppText(
-                  text: 'Nonny Esodo',
-                  fontweight: FontWeight.w600,
-                  color: Appcolors.blue),
-              Row(
-                children: [
-                  AppText(
-                      text: 'Painter',
-                      color: Appcolors.blackColor.withOpacity(0.5),
-                      size: 16),
-                  SizedBox(width: size.width * 0.02),
-                  HomeButton(
-                      buttoncolor: Appcolors.green,
-                      width: size.width * 0.2,
-                      height: size.height * 0.045,
-                      radius: size.width * 0.02,
-                      ontap: () {},
-                      child: AppText(
-                          text: 'Verified',
-                          size: 12,
-                          fontweight: FontWeight.w600,
-                          color: Appcolors.white))
-                ],
-              ),
-              AppText(
-                  text: 'Member since 2022',
-                  color: Appcolors.blackColor.withOpacity(0.5),
-                  size: 16),
-            ],
-          )
-        ],
-      ),
+      child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        ProfilePic(
+            size: size,
+            height: size.width * 0.25,
+            radius: size.width * 0.2,
+            width: size.width * 0.25),
+        SizedBox(width: size.width * 0.04),
+        Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          AppText(
+              text: '${selectedArtisan.name}',
+              fontweight: FontWeight.w600,
+              color: Appcolors.blue),
+          Row(children: [
+            AppText(
+                text: context.watch<HomeCubit>().selectedCategory,
+                color: Appcolors.blackColor.withOpacity(0.5),
+                size: 16),
+            SizedBox(width: size.width * 0.02),
+            HomeButton(
+                buttoncolor: Appcolors.green,
+                width: size.width * 0.2,
+                height: size.height * 0.045,
+                radius: size.width * 0.02,
+                ontap: () {},
+                child: AppText(
+                    text: 'Verified',
+                    size: 12,
+                    fontweight: FontWeight.w600,
+                    color: Appcolors.white))
+          ]),
+          AppText(
+              text: 'Member since 2022',
+              color: Appcolors.blackColor.withOpacity(0.5),
+              size: 16)
+        ])
+      ]),
     );
   }
 }
@@ -223,18 +218,17 @@ class BookNow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final selectedArtisan = context.watch<HomeCubit>().selectedArtisan;
     return Container(
-      padding: EdgeInsets.symmetric(
-          horizontal: size.width * 0.03, vertical: size.width * 0.03),
-      width: size.width,
-      decoration: BoxDecoration(
-        color: Appcolors.white,
-        border: Border.all(
-            color: Appcolors.lightgrey.withOpacity(0.1), width: 2.5.sp),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
+        padding: EdgeInsets.symmetric(
+            horizontal: size.width * 0.03, vertical: size.width * 0.03),
+        width: size.width,
+        decoration: BoxDecoration(
+            color: Appcolors.white,
+            border: Border.all(
+                color: Appcolors.lightgrey.withOpacity(0.1), width: 2.5.sp)),
+        child:
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           HomeButton(
               width: size.width * 0.5,
               height: size.height * 0.06,
@@ -244,37 +238,29 @@ class BookNow extends StatelessWidget {
                   color: Appcolors.white,
                   size: 16,
                   fontweight: FontWeight.w600),
-              ontap: () => showDialog(
-                  context: context,
-                  builder: (context) {
-                    return BookingSuccesDialog(size: size);
-                  })),
-          // SizedBox(width: size.width * 0.1),
+              ontap: () => context.read<HomeCubit>().bookArtisan()),
           CircleAvatar(
-            radius: 25.sp,
-            backgroundColor: Appcolors.lightgrey.withOpacity(0.2),
-            child: GestureDetector(
-                onTap: () => Navigator.pushNamed(context, RouteName.chat),
-                child: Icon(Icons.message_outlined,
-                    size: 25.sp, color: Appcolors.orange)),
-          ),
+              radius: 25.sp,
+              backgroundColor: Appcolors.lightgrey.withOpacity(0.2),
+              child: GestureDetector(
+                  onTap: () => Navigator.pushNamed(context, RouteName.chat),
+                  child: Icon(Icons.message_outlined,
+                      size: 25.sp, color: Appcolors.orange))),
           GestureDetector(
-            onTap: () async {
-              final call = Uri.parse('tel:+91 9830268966');
-              if (await canLaunchUrl(call)) {
-                launchUrl(call);
-              } else {
-                throw 'Could not launch $call';
-              }
-            },
-            child: CircleAvatar(
-                backgroundColor: Appcolors.lightgrey.withOpacity(0.2),
-                radius: 25.sp,
-                child: Icon(Icons.phone, size: 25.sp, color: Appcolors.green)),
-          )
-        ],
-      ),
-    );
+              onTap: () async {
+                if (await canLaunchUrl(
+                    Uri.parse(selectedArtisan.mobileNumber!))) {
+                  launchUrl(Uri.parse(selectedArtisan.mobileNumber!));
+                } else {
+                  throw 'Could not launch ${Uri.parse(selectedArtisan.mobileNumber!)}';
+                }
+              },
+              child: CircleAvatar(
+                  backgroundColor: Appcolors.lightgrey.withOpacity(0.2),
+                  radius: 25.sp,
+                  child:
+                      Icon(Icons.phone, size: 25.sp, color: Appcolors.green)))
+        ]));
   }
 }
 
@@ -286,48 +272,42 @@ class BookingSuccesDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog.adaptive(
-      backgroundColor: Appcolors.white,
-      contentPadding: EdgeInsets.zero,
-      content: Container(
-        padding: EdgeInsets.symmetric(
-            horizontal: size.width * 0.03, vertical: size.width * 0.06),
-        decoration: BoxDecoration(
-            color: Appcolors.white,
-            borderRadius: BorderRadius.circular(size.width * 0.03)),
-        width: size.width,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(Icons.assignment, size: 70.sp, color: Appcolors.blue),
-            SizedBox(height: size.height * 0.02),
-            AppText(
-                text: 'Booking Confirmed',
-                fontweight: FontWeight.w700,
-                size: 20,
-                color: Appcolors.blue),
-            SizedBox(height: size.height * 0.005),
-            AppText(
-              textalign: TextAlign.center,
-              text: 'Your booking has been successfully confirmed!',
-              size: 14,
-              color: Appcolors.blue,
-            ),
-            SizedBox(height: size.height * 0.03),
-            HomeButton(
-              width: size.width,
-              height: size.height * 0.06,
-              radius: size.width * 0.03,
-              ontap: () {},
-              child: AppText(
-                  text: 'Confirm',
-                  color: Appcolors.white,
-                  size: 16,
-                  fontweight: FontWeight.w600),
-            )
-          ],
-        ),
-      ),
-    );
+        backgroundColor: Appcolors.white,
+        contentPadding: EdgeInsets.zero,
+        content: Container(
+            padding: EdgeInsets.symmetric(
+                horizontal: size.width * 0.03, vertical: size.width * 0.06),
+            decoration: BoxDecoration(
+                color: Appcolors.white,
+                borderRadius: BorderRadius.circular(size.width * 0.03)),
+            width: size.width,
+            child: Column(mainAxisSize: MainAxisSize.min, children: [
+              Icon(Icons.assignment, size: 70.sp, color: Appcolors.blue),
+              SizedBox(height: size.height * 0.02),
+              AppText(
+                  text: 'Booking Confirmed',
+                  fontweight: FontWeight.w700,
+                  size: 20,
+                  color: Appcolors.blue),
+              SizedBox(height: size.height * 0.005),
+              AppText(
+                  textalign: TextAlign.center,
+                  text: 'Your booking has been successfully confirmed!',
+                  size: 14,
+                  color: Appcolors.blue),
+              SizedBox(height: size.height * 0.03),
+              HomeButton(
+                  width: size.width,
+                  height: size.height * 0.06,
+                  radius: size.width * 0.03,
+                  ontap: () =>
+                      Navigator.pushNamed(context, RouteName.bottomNav),
+                  child: AppText(
+                      text: 'Confirm',
+                      color: Appcolors.white,
+                      size: 16,
+                      fontweight: FontWeight.w600))
+            ])));
   }
 }
 
