@@ -11,11 +11,9 @@ class AuthRepo implements AuthRepoInterface {
   Future<Response> login(
       {required String email, required String password}) async {
     var body = {'email': email, 'password': password};
-    var url = Uri.parse(Apis.login);
-    log(url.toString());
-    var response = await client.post(url,
+
+    return await client.post(Uri.parse(Apis.login),
         body: jsonEncode(body), headers: ApiHeaders.unaunthenticatedHeader);
-    return response;
   }
 
   @override
@@ -30,39 +28,26 @@ class AuthRepo implements AuthRepoInterface {
       'mobile_number': mobile,
       'name': name
     };
-    var url = Uri.parse(Apis.register);
-    log(url.toString());
-    var response = await client.post(url,
+    return await client.post(Uri.parse(Apis.register),
         body: jsonEncode(body), headers: ApiHeaders.unaunthenticatedHeader);
-    return response;
   }
 
   @override
   Future<Response> deleteAccount() async {
-    var url = Uri.parse(Apis.delete);
-    log(url.toString());
-    log('${ApiHeaders.aunthenticatedHeader.values}');
-    var response =
-        await client.delete(url, headers: ApiHeaders.aunthenticatedHeader);
-    return response;
+    return await client.delete(Uri.parse(Apis.delete),
+        headers: ApiHeaders.aunthenticatedHeader);
   }
 
   @override
   Future<Response> verifyEmail({required String code}) async {
-    var url = Uri.parse(Apis.verifyEmail);
     var body = {'code': code};
-    log('${ApiHeaders.aunthenticatedHeader.values}');
-    var response = await client.post(url,
+    return await client.post(Uri.parse(Apis.verifyEmail),
         body: jsonEncode(body), headers: ApiHeaders.aunthenticatedHeader);
-    return response;
   }
 
   @override
   Future<Response> resendEmailOtp() async {
-    var url = Uri.parse(Apis.resendEmailOtp);
-    log('${ApiHeaders.aunthenticatedHeader.values}');
-    var response =
-        await client.post(url, headers: ApiHeaders.aunthenticatedHeader);
-    return response;
+    return await client.post(Uri.parse(Apis.resendEmailOtp),
+        headers: ApiHeaders.aunthenticatedHeader);
   }
 }

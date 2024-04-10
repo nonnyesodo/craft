@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../data/local/booking_images.dart';
+
 class Bookings extends StatelessWidget {
   const Bookings({super.key});
 
@@ -14,26 +16,23 @@ class Bookings extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
     return AppScaffold(
+        loadWithloader:
+            context.watch<BookingCubit>().state is BookingLoadingState,
         color: Appcolors.blue,
-        body: Column(
-          children: [
-            BookingAppbar(size: size),
-            SizedBox(height: size.height * 0.03),
-            Expanded(
-                child: Container(
-              width: size.width,
-              color: Appcolors.white,
-              child: Column(
-                children: [
-                  SizedBox(height: size.height * 0.02),
-                  BookingFilter(size: size),
-                  SizedBox(height: size.height * 0.02),
-                  AllBookings(size: size)
-                ],
-              ),
-            ))
-          ],
-        ));
+        body: Column(children: [
+          BookingAppbar(size: size),
+          SizedBox(height: size.height * 0.03),
+          Expanded(
+              child: Container(
+                  width: size.width,
+                  color: Appcolors.white,
+                  child: Column(children: [
+                    SizedBox(height: size.height * 0.02),
+                    BookingFilter(size: size),
+                    SizedBox(height: size.height * 0.02),
+                    AllBookings(size: size)
+                  ])))
+        ]));
   }
 }
 
@@ -44,97 +43,115 @@ class AllBookings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final readBooking = context.read<BookingCubit>();
     final bookings = context.watch<BookingCubit>().filteredBooking;
     return Expanded(
-        child: ListView(
-            children: List.generate(
-                bookings.length,
-                (index) => AppshadowContainer(
-                    onTap: () {
-                      context
-                          .read<BookingCubit>()
-                          .selectBooking(booking: bookings[index]);
-                      Navigator.pushNamed(context, RouteName.bookingDetail);
-                    },
-                    padding: EdgeInsets.symmetric(
-                        horizontal: size.width * 0.03,
-                        vertical: size.width * 0.03),
-                    margin: EdgeInsets.symmetric(
-                        vertical: size.width * 0.02,
-                        horizontal: size.width * 0.03),
-                    width: size.width,
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                AppText(
-                                    text: "${bookings[index].referenceNumber}",
-                                    color: Appcolors.blue,
-                                    size: 16),
-                                BookingButton(
-                                    width: size.width * 0.25,
-                                    height: size.height * 0.03,
-                                    radius: size.width * 0.01,
-                                    child: AppText(
-                                        text: '${bookings[index].status}',
-                                        size: 12,
-                                        color: Appcolors.white,
-                                        fontweight: FontWeight.w600))
-                              ]),
-                          AppText(
-                              text: '${bookings[index].artisanName}',
-                              color: Appcolors.blue,
-                              size: 16,
-                              fontweight: FontWeight.w500),
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                AppText(
-                                    text: 'CCtv instalation',
-                                    fontweight: FontWeight.w600,
-                                    color: Appcolors.blue),
-                                AppText(
-                                    text:
-                                        '${Utils.formatPrice(value: bookings[index].cost!)}',
-                                    size: 14,
-                                    color: Appcolors.blue,
-                                    fontweight: FontWeight.w600)
-                              ]),
-                          AppText(
-                              text:
-                                  '${Utils.formatDate(value: bookings[index].date!).month} ${Utils.formatDate(value: bookings[index].date!).date} ${Utils.formatTime(value: bookings[index].time!)}',
-                              size: 14,
-                              color: Appcolors.blue),
-                          Divider(color: Appcolors.lightgrey),
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(children: [
-                                  Icon(Icons.phone, size: 20.sp),
-                                  SizedBox(width: size.width * 0.02),
-                                  AppText(
-                                      text: 'Call',
-                                      fontweight: FontWeight.w600,
-                                      size: 16,
-                                      color: Appcolors.blue)
-                                ]),
-                                Visibility(
-                                    visible:
-                                        bookings[index].status == 'pending',
-                                    child: BookingButton(
-                                        buttoncolor: Appcolors.redColor,
-                                        width: size.width * 0.3,
-                                        height: size.height * 0.045,
-                                        radius: size.width * 0.02,
+        child: bookings.isNotEmpty
+            ? ListView(
+                children: List.generate(
+                    bookings.length,
+                    (index) => AppshadowContainer(
+                        onTap: () {
+                          readBooking.selectBooking(booking: bookings[index]);
+                          Navigator.pushNamed(context, RouteName.bookingDetail);
+                        },
+                        padding: EdgeInsets.symmetric(
+                            horizontal: size.width * 0.03,
+                            vertical: size.width * 0.03),
+                        margin: EdgeInsets.symmetric(
+                            vertical: size.width * 0.02,
+                            horizontal: size.width * 0.03),
+                        width: size.width,
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    AppText(
+                                        text:
+                                            "${bookings[index].referenceNumber}",
+                                        color: Appcolors.blue,
+                                        size: 16),
+                                    BookingButton(
+                                        width: size.width * 0.25,
+                                        height: size.height * 0.03,
+                                        radius: size.width * 0.01,
                                         child: AppText(
-                                            text: 'Cancel',
+                                            text: '${bookings[index].status}',
                                             size: 12,
                                             color: Appcolors.white,
-                                            fontweight: FontWeight.w600)))
-                              ])
-                        ])))));
+                                            fontweight: FontWeight.w600))
+                                  ]),
+                              AppText(
+                                  text: '${bookings[index].artisanName}',
+                                  color: Appcolors.blue,
+                                  size: 16,
+                                  fontweight: FontWeight.w500),
+                              Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    AppText(
+                                        text: 'CCtv instalation',
+                                        fontweight: FontWeight.w600,
+                                        color: Appcolors.blue),
+                                    AppText(
+                                        text:
+                                            '${Utils.formatPrice(value: bookings[index].cost!)}',
+                                        size: 14,
+                                        color: Appcolors.blue,
+                                        fontweight: FontWeight.w600)
+                                  ]),
+                              AppText(
+                                  text:
+                                      '${Utils.formatDate(value: bookings[index].date!).month} ${Utils.formatDate(value: bookings[index].date!).date} ${Utils.formatTime(value: bookings[index].time!)}',
+                                  size: 14,
+                                  color: Appcolors.blue),
+                              Divider(color: Appcolors.lightgrey),
+                              Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(children: [
+                                      Icon(Icons.phone, size: 20.sp),
+                                      SizedBox(width: size.width * 0.02),
+                                      AppText(
+                                          text: 'Call',
+                                          fontweight: FontWeight.w600,
+                                          size: 16,
+                                          color: Appcolors.blue)
+                                    ]),
+                                    Visibility(
+                                        visible:
+                                            bookings[index].status == 'pending',
+                                        child: BookingButton(
+                                            ontap: () {
+                                              readBooking.selectBooking(
+                                                  booking: bookings[index]);
+                                              readBooking.cancelBooking();
+                                            },
+                                            buttoncolor: Appcolors.redColor,
+                                            width: size.width * 0.3,
+                                            height: size.height * 0.045,
+                                            radius: size.width * 0.02,
+                                            child: AppText(
+                                                text: 'Cancel',
+                                                size: 12,
+                                                color: Appcolors.white,
+                                                fontweight: FontWeight.w600)))
+                                  ])
+                            ]))))
+            : Column(children: [
+                SizedBox(height: size.height * 0.08),
+                Image.asset(BookingImage.emptyBooking),
+                AppText(
+                    fontweight: FontWeight.w600,
+                    color: Appcolors.blue,
+                    text:
+                        'No ${context.watch<BookingCubit>().bookingFilter} Bookings')
+              ]));
   }
 }
 

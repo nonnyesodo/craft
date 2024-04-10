@@ -25,40 +25,36 @@ class BookingTextfield extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
     return TextFormField(
-      maxLines: maxline,
-      obscuringCharacter: '*',
-      obscureText: obscure ?? false,
-      cursorColor: Appcolors.blue,
-      controller: controller,
-      keyboardType: keyboardtype,
-      textCapitalization: TextCapitalization.sentences,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      validator: validator,
-      decoration: InputDecoration(
-          suffixIconColor: MaterialStateColor.resolveWith((states) =>
-              states.contains(MaterialState.focused)
-                  ? Appcolors.blue
-                  : Appcolors.lightgrey),
-          prefixIconColor: MaterialStateColor.resolveWith((states) =>
-              states.contains(MaterialState.focused)
-                  ? Appcolors.blue
-                  : Appcolors.lightgrey),
-          filled: true,
-          fillColor: Appcolors.lightgrey.withOpacity(0.3),
-          contentPadding: EdgeInsets.zero,
-          prefixIcon: prefixicon,
-          suffixIcon: suffixicon,
-          hintText: hintext,
-          focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(
-                size.width * 0.02,
-              ),
-              borderSide: BorderSide(color: Appcolors.blue)),
-          enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(
-                size.width * 0.02,
-              ),
-              borderSide: BorderSide(color: Appcolors.lightgrey))),
-    );
+        onTapOutside: (_) => FocusScope.of(context).unfocus(),
+        maxLines: maxline,
+        obscuringCharacter: '*',
+        obscureText: obscure ?? false,
+        cursorColor: Appcolors.blue,
+        controller: controller,
+        keyboardType: keyboardtype,
+        textCapitalization: TextCapitalization.sentences,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        validator: validator,
+        decoration: InputDecoration(
+            suffixIconColor: MaterialStateColor.resolveWith((states) =>
+                states.contains(MaterialState.focused)
+                    ? Appcolors.blue
+                    : Appcolors.lightgrey),
+            prefixIconColor: MaterialStateColor.resolveWith((states) =>
+                states.contains(MaterialState.focused)
+                    ? Appcolors.blue
+                    : Appcolors.lightgrey),
+            filled: true,
+            fillColor: Appcolors.lightgrey.withOpacity(0.3),
+            contentPadding: EdgeInsets.zero,
+            prefixIcon: prefixicon,
+            suffixIcon: suffixicon,
+            hintText: hintext,
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(size.width * 0.02),
+                borderSide: BorderSide(color: Appcolors.blue)),
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(size.width * 0.02),
+                borderSide: BorderSide(color: Appcolors.lightgrey))));
   }
 }

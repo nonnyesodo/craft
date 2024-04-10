@@ -13,6 +13,8 @@ class Apis {
   static String bookArtisan(id) => '$baseUrl/user/artisans/book/$id';
   static const String bookingHistory = '$baseUrl/user/request/history';
   static const String getNotification = '$baseUrl/user/user-notifications';
+  static String rateArtisan(id) => '$baseUrl/user/artisans/rate/$id';
+  static String cancelBooking(id) => '$baseUrl/user/request/cancel/$id';
 }
 
 class ApiHeaders {

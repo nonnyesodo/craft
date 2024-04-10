@@ -15,6 +15,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
+import '../../../authentication/presentation/pages/login_page.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -62,8 +64,15 @@ class _SplashScreenState extends State<SplashScreen> {
             readHome.getCategories();
             readHome.getNotification();
             context.read<BookingCubit>().getbookingHistory();
+
             Navigator.pushNamedAndRemoveUntil(
                 context, RouteName.bottomNav, (route) => false);
+            showDialog(
+                barrierDismissible: false,
+                context: context,
+                builder: (context) {
+                  return const AuthAlertDialog(title: 'Logged In');
+                });
           }
           if (state is AuthErrorState) {
             Navigator.pushNamed(context, RouteName.login);
