@@ -8,6 +8,7 @@ import 'package:craftman/features/booking/data/remote/booking_repo.dart';
 import 'package:craftman/features/booking/presentation/bloc/cubit/booking_cubit.dart';
 import 'package:craftman/features/home/data/remote_repo/home_repo.dart';
 import 'package:craftman/features/home/presentation/bloc/cubit/home_cubit.dart';
+import 'package:craftman/features/service_provider/presentation/bloc/cubit/kyc_cubit.dart';
 import 'package:craftman/features/splash_onboarding/presentation/bloc/cubit/onboarding_cubit.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,8 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => AuthCubit(AuthRepo())),
           BlocProvider(create: (context) => BookingCubit(BookingRepo())),
           BlocProvider(create: (context) => AccountCubit(AcctRepo())),
-          BlocProvider(create: (context) => HomeCubit(HomeRepo()))
+          BlocProvider(create: (context) => HomeCubit(HomeRepo())),
+          BlocProvider(create: (context) => KycCubit()),
         ],
         child: ScreenUtilInit(
             minTextAdapt: true,
@@ -41,6 +43,12 @@ class MyApp extends StatelessWidget {
             designSize: MediaQuery.sizeOf(context),
             builder: (context, child) {
               return MaterialApp(
+                  builder: (context, child) {
+                    return MediaQuery(
+                        data: MediaQuery.of(context)
+                            .copyWith(textScaler: const TextScaler.linear(0.9)),
+                        child: child!);
+                  },
                   debugShowCheckedModeBanner: false,
                   title: 'Craftman',
                   theme: ThemeData(

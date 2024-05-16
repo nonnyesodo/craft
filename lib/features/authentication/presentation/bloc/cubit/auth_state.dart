@@ -21,7 +21,7 @@ final class AuthTokenVerifiedState extends AuthState {}
 
 final class AuthRegisterState extends AuthState {}
 
-final class AuthLoginState extends AuthState {}
+final class LoginState extends AuthState {}
 
 final class AuthEmailVerifiedState extends AuthState {}
 

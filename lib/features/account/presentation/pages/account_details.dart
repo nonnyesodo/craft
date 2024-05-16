@@ -156,28 +156,6 @@ class AccountDetails extends StatelessWidget {
                                     text: 'Confirm',
                                     color: Appcolors.white,
                                     fontweight: FontWeight.w600))),
-                        Positioned(
-                            left: 0,
-                            right: 0,
-                            top: size.height * 0.65,
-                            child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  AppText(
-                                      text:
-                                          'Want to become a service provider? ',
-                                      size: 12,
-                                      color: Appcolors.blue),
-                                  GestureDetector(
-                                      onTap: () => Navigator.pushNamed(context,
-                                          RouteName.serviceProviderform),
-                                      child: AppText(
-                                          maxline: 2,
-                                          text: 'Click Here ',
-                                          size: 14,
-                                          fontweight: FontWeight.w600,
-                                          color: Appcolors.orange)),
-                                ])),
                       ])))
             ])));
   }

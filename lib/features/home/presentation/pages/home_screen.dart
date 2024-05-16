@@ -10,26 +10,19 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
     return AppScaffold(
-      color: Appcolors.blue,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        color: Appcolors.blue,
+        body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           HomeAppbar(size: size),
           SizedBox(height: size.height * 0.02),
           Expanded(
               child: Container(
-            padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
-            width: size.width,
-            color: Appcolors.white,
-            child: Column(
-              children: [
-                SizedBox(height: size.height * 0.01),
-                HomeCategoriesAndPopularService(size: size)
-              ],
-            ),
-          ))
-        ],
-      ),
-    );
+                  padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
+                  width: size.width,
+                  color: Appcolors.white,
+                  child: Column(children: [
+                    SizedBox(height: size.height * 0.01),
+                    HomeCategoriesAndPopularService(size: size)
+                  ])))
+        ]));
   }
 }

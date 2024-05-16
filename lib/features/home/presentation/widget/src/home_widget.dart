@@ -173,8 +173,8 @@ class CategorieContainer extends StatelessWidget {
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               Icon(
-                  HomeStaticRepo
-                      .servicesIcon[watchHome.category[index].category],
+                  HomeStaticRepo.servicesIcon[
+                      watchHome.category[index].category!.split(' ').first],
                   color: HomeStaticRepo.servicesColor[index],
                   size: 45.sp),
               SizedBox(height: size.height * 0.01),
@@ -182,7 +182,14 @@ class CategorieContainer extends StatelessWidget {
                   height: size.height * 0.042,
                   child: AppText(
                       textalign: TextAlign.center,
-                      text: '${watchHome.category[index].category}',
+                      text: watchHome.category[index].category!
+                                  .split(' ')
+                                  .first ==
+                              watchHome.category[index].category!
+                                  .split(' ')
+                                  .last
+                          ? watchHome.category[index].category!.split(' ').first
+                          : '${watchHome.category[index].category!.split(' ').first}\n${watchHome.category[index].category!.split(' ').lastOrNull ?? ''}',
                       color: Appcolors.blue,
                       size: 14,
                       fontweight: FontWeight.w500))

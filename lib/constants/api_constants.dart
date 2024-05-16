@@ -15,6 +15,7 @@ class Apis {
   static const String getNotification = '$baseUrl/user/user-notifications';
   static String rateArtisan(id) => '$baseUrl/user/artisans/rate/$id';
   static String cancelBooking(id) => '$baseUrl/user/request/cancel/$id';
+  static String popularService = '$baseUrl/user/artisans/popular/categories';
 }
 
 class ApiHeaders {

@@ -21,20 +21,20 @@ class HomeStaticRepo {
   ];
 
   static Map servicesIcon = {
-    'Wallpaper Installer': MyFlutterApp.nounwallpaper2423887,
-    'Window Blind': MyFlutterApp.windowsvgrepocom1,
-    'Solar Installer': MyFlutterApp.nounsolar2935327,
-    'Refrigerator Repair': MyFlutterApp.nounrefrigerator10740,
-    'House Agent': MyFlutterApp.apartmentsvgrepocom,
+    'Wallpaper': MyFlutterApp.nounwallpaper2423887,
+    'Window': MyFlutterApp.windowsvgrepocom1,
+    'Solar': MyFlutterApp.nounsolar2935327,
+    'Refrigerator': MyFlutterApp.nounrefrigerator10740,
+    'House': MyFlutterApp.apartmentsvgrepocom,
     'Painter': MyFlutterApp.paintersvgrepocom,
-    'Satellite Installer': MyFlutterApp.satellitedishradarsvgrepocom,
-    'Tyler': MyFlutterApp.coursetilesortsvgrepocom,
+    'Satelite': MyFlutterApp.satellitedishradarsvgrepocom,
+    'Tiler': MyFlutterApp.coursetilesortsvgrepocom,
     'Plumber': MyFlutterApp.plumberingwatersupplysvgrepocom,
-    'Generator Repair': MyFlutterApp.noungenerator2453838,
+    'Generator': MyFlutterApp.noungenerator2453838,
     'Electrician': MyFlutterApp.electriciansvgrepocom,
     'Carpenter': MyFlutterApp.carpentersvgrepocom1,
-    'Car Mechanic': MyFlutterApp.airconditionersvgrepocom,
-    'CCTV Installer': MyFlutterApp.surveillancecamerasvgrepocom,
-    'Air Condition': MyFlutterApp.airconditionersvgrepocom2
+    'Car': MyFlutterApp.airconditionersvgrepocom,
+    'CCTV': MyFlutterApp.surveillancecamerasvgrepocom,
+    'Air': MyFlutterApp.airconditionersvgrepocom2
   };
 }

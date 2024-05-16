@@ -40,10 +40,7 @@ class AccountCubit extends Cubit<AccountState> {
 
   uploadPhoto({required img}) async {
     emit(AccountLoadingState());
-
-    log('message');
     final ImagePicker picker = ImagePicker();
-
     final XFile? image = await picker.pickImage(source: img);
 
     log(image!.name.toString());

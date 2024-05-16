@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../config/page route/detail/route_name.dart';
+import '../../../booking/presentation/bloc/cubit/booking_cubit.dart';
+import '../../../home/presentation/bloc/cubit/home_cubit.dart';
 import '../../../splash_onboarding/data/local/onboarding_Images.dart';
 import '../bloc/cubit/auth_cubit.dart';
 import '../src/auth_widgets_export.dart';
@@ -18,9 +20,10 @@ class LoginPage extends StatelessWidget {
     return AppScaffold(
       isloading: watchAuthCubit.state is AuthLoadingState,
       color: Appcolors.blue,
-      body: BlocListener<AuthCubit, AuthState>(
+      body: BlocListener<AuthCubit, AuthState>( 
         listener: (context, state) {
-          if (state is AuthLoginState) {
+          if (state is LoginState) {
+            Navigator.pushNamed(context, RouteName.bottomNav);
             showDialog(
                 barrierDismissible: false,
                 context: context,
@@ -134,6 +137,7 @@ class AuthAlertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
+
     return AlertDialog(
       contentPadding: EdgeInsets.zero,
       content: AppshadowContainer(
@@ -153,7 +157,9 @@ class AuthAlertDialog extends StatelessWidget {
                 textalign: TextAlign.center),
             SizedBox(height: size.width * 0.035),
             AuthButton(
-              ontap: () => Navigator.pushNamed(context, RouteName.bottomNav),
+              ontap: () {
+                Navigator.pop(context);
+              },
               buttoncolor: Appcolors.blue,
               child: AppText(
                   text: 'Proceed',

@@ -16,6 +16,7 @@ class HomeRepo implements HomeInterface {
 
   @override
   Future<Response> getSubCategories({int? id}) async {
+    log(ApiHeaders.aunthenticatedHeader.entries.toString());
     return await client.get(Uri.parse(Apis.subCat(id)),
         headers: ApiHeaders.aunthenticatedHeader);
   }
@@ -34,6 +35,12 @@ class HomeRepo implements HomeInterface {
   @override
   Future<Response> fetchNotification() async {
     return await client.get(Uri.parse(Apis.getNotification),
+        headers: ApiHeaders.aunthenticatedHeader);
+  }
+
+  @override
+  Future<Response> getPopularService() async {
+    return await client.get(Uri.parse(Apis.popularService),
         headers: ApiHeaders.aunthenticatedHeader);
   }
 }

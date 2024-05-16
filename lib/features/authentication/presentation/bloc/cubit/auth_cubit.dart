@@ -158,7 +158,7 @@ class AuthCubit extends Cubit<AuthState> {
           prefs.setStringList(
               "login", [emailController.text, passwordController.text]);
         }
-        emit(AuthLoginState());
+        emit(LoginState());
       } else {
         Fluttertoast.showToast(msg: body['message']);
         emit(const AuthErrorState(error: 'error'));

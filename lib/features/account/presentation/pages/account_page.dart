@@ -97,7 +97,25 @@ class AccountPage extends StatelessWidget {
                               size: 16,
                               color: Appcolors.white,
                               fontweight: FontWeight.w600),
-                        )
+                        ),
+                        SizedBox(height: size.height * 0.04),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              AppText(
+                                  text: 'Want to become a service provider? ',
+                                  size: 14,
+                                  color: Appcolors.blue),
+                              GestureDetector(
+                                  onTap: () => Navigator.pushNamed(
+                                      context, RouteName.KYC),
+                                  child: AppText(
+                                      maxline: 2,
+                                      text: 'Click Here ',
+                                      size: 16,
+                                      fontweight: FontWeight.w600,
+                                      color: Appcolors.orange)),
+                            ])
                       ])),
                 ),
               ],

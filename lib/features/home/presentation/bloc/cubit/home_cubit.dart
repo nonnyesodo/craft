@@ -6,6 +6,7 @@ import 'package:craftman/features/home/data/remote_repo/home_repo.dart';
 import 'package:equatable/equatable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../../data/models/category_model.dart';
+import '../../../data/models/popilar_service_model.dart';
 part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
@@ -47,7 +48,7 @@ class HomeCubit extends Cubit<HomeState> {
           }
         }
         log(category.length.toString());
-        emit(HomeLoaded());
+        emit(FetchedCategoryState());
         log(body.toString());
       } else {
         log(response.body);
@@ -121,6 +122,31 @@ class HomeCubit extends Cubit<HomeState> {
       if (response.statusCode == 200) {
         emit(HomeLoaded());
         log(body.toString());
+      } else {
+        log(response.body);
+        emit(const HomeerrorState(error: 'error'));
+        Fluttertoast.showToast(msg: body['message']);
+      }
+    } catch (e) {
+      emit(const HomeerrorState(error: 'error'));
+      log(e.toString());
+    }
+  }
+
+  List<PopularServiceModel> popularServices = [];
+  getPopularService() async {
+    emit(HomeLoading());
+    try {
+      final response = await homeRepo.getPopularService();
+      final body = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        emit(HomeLoaded());
+        popularServices.clear();
+        for (var serve in body["data"]) {
+          popularServices.add(PopularServiceModel.fromJson(serve));
+        }
+        log(body.toString());
+        emit(FetchedServiceState());
       } else {
         log(response.body);
         emit(const HomeerrorState(error: 'error'));

@@ -12,12 +12,14 @@ class AppshadowContainer extends StatelessWidget {
       this.width,
       this.height,
       this.radius,
-      this.onTap});
+      this.onTap,
+      this.border = false});
   final Widget? child;
   final Color? shadowcolour, color;
   final EdgeInsetsGeometry? padding, margin;
   final double? width, height, radius;
   final Function()? onTap;
+  final bool border;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
@@ -29,6 +31,7 @@ class AppshadowContainer extends StatelessWidget {
         margin: margin,
         padding: padding,
         decoration: BoxDecoration(
+            border: border ? Border.all(color: Appcolors.blue) : null,
             color: color ?? Appcolors.white,
             boxShadow: [
               BoxShadow(

@@ -3,8 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'export.dart';
 
 class CustomAppbar extends StatelessWidget {
-  const CustomAppbar({super.key, required this.title});
+  const CustomAppbar({super.key, required this.title, this.onTap});
   final String title;
+  final Function()? onTap;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
@@ -13,7 +14,7 @@ class CustomAppbar extends StatelessWidget {
       child: Row(
         children: [
           GestureDetector(
-              onTap: () => Navigator.pop(context),
+              onTap: onTap ?? () => Navigator.pop(context),
               child: Icon(Icons.arrow_back_ios,
                   size: 25.sp, color: Appcolors.white)),
           SizedBox(width: size.width * 0.03),

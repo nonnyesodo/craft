@@ -53,6 +53,9 @@ dependencies:
   intl: ^0.19.0
   loading_animation_widget: ^1.2.0+4
   image_picker: ^1.0.7
+  mnc_identifier_face: ^1.0.2
+  geolocator: ^11.0.0
+  geocoding: ^3.0.0
 
 dev_dependencies:
   flutter_test:

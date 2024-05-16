@@ -11,7 +11,6 @@ class AuthRepo implements AuthRepoInterface {
   Future<Response> login(
       {required String email, required String password}) async {
     var body = {'email': email, 'password': password};
-
     return await client.post(Uri.parse(Apis.login),
         body: jsonEncode(body), headers: ApiHeaders.unaunthenticatedHeader);
   }

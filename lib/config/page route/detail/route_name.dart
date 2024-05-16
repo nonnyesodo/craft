@@ -17,7 +17,7 @@ class RouteName {
   static const categories = '/categories';
   static const accountdetail = '/accountdetail';
   static const bookingDetail = '/bookingdetail';
-  static const serviceProviderform = '/serviceproviderform';
+  static const KYC = '/serviceproviderform';
   static const contactUs = '/contactUs';
   static const notification = '/notification';
 }

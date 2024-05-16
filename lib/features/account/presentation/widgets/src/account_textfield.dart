@@ -27,6 +27,7 @@ class AcctTextfield extends StatelessWidget {
     final size = MediaQuery.sizeOf(context);
     return TextFormField(
       enabled: enabled,
+      onTapOutside: (_) => FocusScope.of(context).unfocus(),
       obscuringCharacter: '*',
       obscureText: obscure ?? false,
       cursorColor: Appcolors.orange,

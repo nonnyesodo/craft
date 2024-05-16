@@ -24,7 +24,10 @@ class AppText extends StatelessWidget {
         textAlign: textalign,
         softWrap: true,
         maxLines: maxline,
-        style: GoogleFonts.roboto(
-            fontSize: size.sp, fontWeight: fontweight, color: color));
+        style: GoogleFonts.inter(
+            height: 0,
+            fontSize: size.sp,
+            fontWeight: fontweight,
+            color: color));
   }
 }
