@@ -99,7 +99,7 @@ class AllBookings extends StatelessWidget {
                                         color: Appcolors.blue),
                                     AppText(
                                         text:
-                                            '${Utils.formatPrice(value: bookings[index].cost!)}',
+                                            '${Utils.formatPrice(value: bookings[index].cost ?? '0')}',
                                         size: 14,
                                         color: Appcolors.blue,
                                         fontweight: FontWeight.w600)

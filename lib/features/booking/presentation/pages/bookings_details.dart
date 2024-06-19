@@ -82,7 +82,7 @@ class BookingDetail extends StatelessWidget {
                         BookingDetailInfo(
                             title: 'Price Details',
                             value:
-                                '${Utils.formatPrice(value: selectedBooking.cost)}'),
+                                '${Utils.formatPrice(value: selectedBooking.cost ?? '0')}'),
                         SizedBox(height: size.height * 0.01),
                         const BookingDetailInfo(
                             title: 'Method Of Payment', value: 'Cash'),
@@ -93,7 +93,7 @@ class BookingDetail extends StatelessWidget {
                         BookingDetailInfo(
                             title: 'Total Amount',
                             value:
-                                '${Utils.formatPrice(value: selectedBooking.cost)}'),
+                                '${Utils.formatPrice(value: selectedBooking.cost ?? '0')}'),
                         SizedBox(height: size.height * 0.06),
                         AppText(
                             text: 'You haven\'t rated yet?',
