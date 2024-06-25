@@ -4,7 +4,6 @@ import 'package:craftman/constants/appscaffold.dart';
 import 'package:craftman/constants/apptext.dart';
 import 'package:craftman/features/splash_onboarding/data/local/onboarding_images.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../widgets/exports.dart';
 

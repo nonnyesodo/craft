@@ -37,12 +37,12 @@ class AcctTextfield extends StatelessWidget {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: validator,
       decoration: InputDecoration(
-          suffixIconColor: MaterialStateColor.resolveWith((states) =>
-              states.contains(MaterialState.focused)
+          suffixIconColor: WidgetStateColor.resolveWith((states) =>
+              states.contains(WidgetState.focused)
                   ? Appcolors.orange
                   : Appcolors.lightgrey),
-          prefixIconColor: MaterialStateColor.resolveWith((states) =>
-              states.contains(MaterialState.focused)
+          prefixIconColor: WidgetStateColor.resolveWith((states) =>
+              states.contains(WidgetState.focused)
                   ? Appcolors.orange
                   : Appcolors.lightgrey),
           filled: noborder ? false : true,

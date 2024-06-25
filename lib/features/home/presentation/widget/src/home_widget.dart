@@ -1,10 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:craftman/constants/util/c_icon.dart';
 import 'package:craftman/constants/util/useful_methods.dart';
 import 'package:craftman/features/authentication/presentation/bloc/cubit/auth_cubit.dart';
 import 'package:craftman/features/home/data/local/home_static_repo.dart';
 import 'package:craftman/features/home/presentation/bloc/cubit/home_cubit.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

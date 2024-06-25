@@ -1,9 +1,4 @@
-import 'dart:developer';
-
 import 'package:craftman/config/page%20route/detail/route_name.dart';
-import 'package:craftman/constants/appcolors.dart';
-import 'package:craftman/constants/appscaffold.dart';
-import 'package:craftman/constants/apptext.dart';
 import 'package:craftman/constants/export.dart';
 import 'package:craftman/features/account/presentation/widgets/src/account_button.dart';
 import 'package:craftman/features/authentication/presentation/bloc/cubit/auth_cubit.dart';
@@ -108,7 +103,7 @@ class AccountPage extends StatelessWidget {
                                   color: Appcolors.blue),
                               GestureDetector(
                                   onTap: () => Navigator.pushNamed(
-                                      context, RouteName.KYC),
+                                      context, RouteName.kyc),
                                   child: AppText(
                                       maxline: 2,
                                       text: 'Click Here ',

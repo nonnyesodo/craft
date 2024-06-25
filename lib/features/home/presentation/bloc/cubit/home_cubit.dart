@@ -110,7 +110,7 @@ class HomeCubit extends Cubit<HomeState> {
       }
     } catch (e) {
       emit(const HomeerrorState(error: 'error'));
-      log("meeedd" + e.toString());
+      log("meeedd$e");
     }
   }
 

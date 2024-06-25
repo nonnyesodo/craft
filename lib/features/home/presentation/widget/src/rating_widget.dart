@@ -123,7 +123,7 @@ class RatingProgressBar extends StatelessWidget {
                       width: size.width * 0.6,
                       height: size.height * 0.05,
                       curve: Curves.fastOutSlowIn,
-                      duration: Duration(milliseconds: 500)),
+                      duration: const Duration(milliseconds: 500)),
                   AppText(
                       text: '40%',
                       color: Appcolors.blue,

@@ -14,10 +14,7 @@ class Chats extends StatelessWidget {
         body: Column(
           children: [
             SizedBox(height: size.height * 0.01),
-            Padding(
-              padding: EdgeInsets.only(left: size.width * 0.04),
-              child: const CustomAppbar(title: 'Chats'),
-            ),
+            const CustomAppbar(title: 'Chats'),
             SizedBox(height: size.height * 0.015),
             Expanded(
               child: Container(

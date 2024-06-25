@@ -1,4 +1,3 @@
-import 'package:craftman/config/page%20route/detail/route_name.dart';
 import 'package:craftman/features/authentication/presentation/pages/login_page.dart';
 import 'package:craftman/features/authentication/presentation/pages/mobile_0tp.dart';
 import 'package:flutter/material.dart';

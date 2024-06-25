@@ -8,3 +8,7 @@ sealed class ChatState extends Equatable {
 }
 
 final class ChatInitial extends ChatState {}
+
+final class ChatLoadingState extends ChatState {}
+
+final class ChatLoadedState extends ChatState {}

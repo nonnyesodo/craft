@@ -1,3 +1,4 @@
+import 'package:craftman/features/message/presentation/bloc/cubit/chat_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -5,6 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../config/page route/page_route.dart';
 import '../../../../../constants/export.dart';
+import '../../../../message/data/model/chatId_model.dart';
 import '../../../../splash_onboarding/data/local/onboarding_images.dart';
 import '../../bloc/cubit/home_cubit.dart';
 import '../export.dart';
@@ -243,7 +245,16 @@ class BookNow extends StatelessWidget {
               radius: 25.sp,
               backgroundColor: Appcolors.lightgrey.withOpacity(0.2),
               child: GestureDetector(
-                  onTap: () => Navigator.pushNamed(context, RouteName.chat),
+                  onTap: () {
+                    context.read<ChatCubit>().selectChatId(
+                        user: '',
+                        otherUser: context
+                            .read<HomeCubit>()
+                            .selectedArtisan
+                            .artisanId
+                            .toString());
+                    Navigator.pushNamed(context, RouteName.chat);
+                  },
                   child: Icon(Icons.message_outlined,
                       size: 25.sp, color: Appcolors.orange))),
           GestureDetector(

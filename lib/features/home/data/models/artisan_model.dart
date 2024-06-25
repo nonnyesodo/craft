@@ -38,9 +38,9 @@ class ArtisansModel {
     biography = json['biography'];
     verified = json['verified'];
     avgRatinfg = json['avg_ratinfg'];
-    if (json['rating'] != null) {
+    if (json['user_feedback'] != null) {
       rating = <Rating>[];
-      json['rating'].forEach((v) {
+      json['user_feedback'].forEach((v) {
         rating!.add(Rating.fromJson(v));
       });
     }
@@ -50,15 +50,23 @@ class ArtisansModel {
 class Rating {
   int? id;
   String? review;
-  String? rating;
+  String? user;
+  dynamic rating;
   int? userId;
   int? artisanId;
 
-  Rating({this.id, this.review, this.rating, this.userId, this.artisanId});
+  Rating(
+      {this.id,
+      this.review,
+      this.rating,
+      this.userId,
+      this.artisanId,
+      this.user});
 
   Rating.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     review = json['review'];
+    user = json['user'];
     rating = json['rating'];
     userId = json['user_id'];
     artisanId = json['artisan_id'];

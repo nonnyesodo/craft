@@ -1,4 +1,4 @@
-import 'package:craftman/config/page%20route/detail/route_name.dart';
+
 import 'package:craftman/constants/export.dart';
 import 'package:craftman/features/account/presentation/bloc/cubit/account_cubit.dart';
 import 'package:craftman/features/account/presentation/widgets/src/account_button.dart';

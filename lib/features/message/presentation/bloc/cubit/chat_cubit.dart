@@ -1,12 +1,24 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
+import '../../../data/model/chatid_model.dart';
 part 'chat_state.dart';
 
 class ChatCubit extends Cubit<ChatState> {
   ChatCubit() : super(ChatInitial());
   final firestore = FirebaseFirestore.instance;
+  ChatIdModel selectedChatId = ChatIdModel();
+  selectChatId({user, otherUser}) {
+    emit(ChatLoadingState());
+    selectedChatId = ChatIdModel(currentUser: user, otherUser: otherUser);
+    log(selectedChatId.otherUser.toString());
+    emit(ChatLoadedState());
+  }
+
   getChatRoomId(String a, String b) {
     if (a.substring(0, 1).codeUnitAt(0) > b.substring(0, 1).codeUnitAt(0)) {
       return "${b}_$a";

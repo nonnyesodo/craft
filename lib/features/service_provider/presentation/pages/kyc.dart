@@ -444,7 +444,7 @@ class _IdTypeDropdownState extends State<IdTypeDropdown> {
                             radius: widget.size.width * 0.01)
                       ],
                     ),
-                    Visibility(visible: index != 3, child: Divider())
+                    Visibility(visible: index != 3, child: const Divider())
                   ],
                 ),
               ))),

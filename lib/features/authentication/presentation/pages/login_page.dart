@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../config/page route/detail/route_name.dart';
-import '../../../booking/presentation/bloc/cubit/booking_cubit.dart';
-import '../../../home/presentation/bloc/cubit/home_cubit.dart';
 import '../../../splash_onboarding/data/local/onboarding_Images.dart';
 import '../bloc/cubit/auth_cubit.dart';
 import '../src/auth_widgets_export.dart';

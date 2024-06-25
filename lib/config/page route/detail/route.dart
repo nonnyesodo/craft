@@ -78,7 +78,7 @@ class AppRoute {
         return CustomPageRoute(child: const AccountDetails());
       case RouteName.bookingDetail:
         return CustomPageRoute(child: const BookingDetail());
-      case RouteName.KYC:
+      case RouteName.kyc:
         return CustomPageRoute(child: const KYC());
       case RouteName.contactUs:
         return CustomPageRoute(child: const ContactUs());
