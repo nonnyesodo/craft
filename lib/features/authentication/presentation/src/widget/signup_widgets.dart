@@ -130,7 +130,8 @@ class SignupFirstnameTextfield extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        SizedBox(
+        SizedBox( 
+          
             width: size.width * 0.45,
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

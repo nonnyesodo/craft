@@ -105,7 +105,8 @@ class LoginPage extends StatelessWidget {
                         width: size.width,
                         height: size.width * 0.13,
                         radius: size.width * 0.03,
-                        ontap: () => readAuthCubit.login(),
+                        // ontap: () => readAuthCubit.login(),
+                        ontap: () =>  Navigator.pushNamed(context, RouteName.bottomNav),
                         child: AppText(
                             text: 'Login',
                             color: Appcolors.white,
